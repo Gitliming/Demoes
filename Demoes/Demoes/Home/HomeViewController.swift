@@ -26,18 +26,11 @@ class HomeViewController: BaseViewController {
         tableView = HomeView(frame: CGRectMake(0, 0, view.bounds.width, view.bounds.height), style: .Plain)
         tableView!.layer.contents = UIImage(named: "bg")?.CGImage
         view.addSubview(tableView!)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeViewController.pushAction(_:)), name: "push", object: nil)
-        
         navigationController?.navigationBar.setBackgroundImage(UIImage(named: "k"), forBarMetrics: UIBarMetrics.Default)
         navigationController?.navigationBar.tintColor = UIColor.orangeColor()
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.purpleColor()]
     }
     
-    func pushAction(notifi:NSNotification){
-        let vc = notifi.object as! UIViewController
-       (self.navigationController as! CustomAnimaViewNavigation).pushViewController(vc, Rect: CGRect(origin: view.center, size: CGSizeZero), animated: true)
-    }
-
 //裁剪图片
     func clipeImage(imageName:String?, imgWidth:CGFloat, imgHeight:CGFloat){
         
@@ -64,8 +57,5 @@ class HomeViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    deinit{
-    NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
 }
 

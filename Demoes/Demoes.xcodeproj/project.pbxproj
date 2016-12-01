@@ -33,6 +33,7 @@
 		1E991E4C1DEC346800723671 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E991E4B1DEC346800723671 /* Assets.xcassets */; };
 		1E991E4F1DEC346800723671 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E991E4D1DEC346800723671 /* LaunchScreen.storyboard */; };
 		1EC061701DF014DD00E5AD35 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC0616F1DF014DD00E5AD35 /* BaseViewController.swift */; };
+		1EC061721DF021D300E5AD35 /* UIView + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC061711DF021D300E5AD35 /* UIView + Extention.swift */; };
 		1EE501CD1DEFCA3500F6B308 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EE501CC1DEFCA3500F6B308 /* Images.xcassets */; };
 		AFD5CD2B7A3CDF7172C871AA /* Pods_Demoes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4535766391C58BF246C5A1 /* Pods_Demoes.framework */; };
 /* End PBXBuildFile section */
@@ -85,6 +86,7 @@
 		1E991E551DEC346800723671 /* DemoesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E991E601DEC346800723671 /* DemoesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EC0616F1DF014DD00E5AD35 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		1EC061711DF021D300E5AD35 /* UIView + Extention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView + Extention.swift"; sourceTree = "<group>"; };
 		1EE501CC1DEFCA3500F6B308 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3A4535766391C58BF246C5A1 /* Pods_Demoes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demoes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6991A355B3C938EC19282BC8 /* Pods-Demoes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demoes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demoes/Pods-Demoes.debug.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			children = (
 				1E43DA361DEED661002A3963 /* NavigationItem + Extension.swift */,
 				1E43DA371DEED661002A3963 /* UIviewcontroller+Extension.swift */,
+				1EC061711DF021D300E5AD35 /* UIView + Extention.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				1E43DA501DEED661002A3963 /* NavigationItem + Extension.swift in Sources */,
 				1E43DA591DEED661002A3963 /* ScanView.swift in Sources */,
 				1E43DA551DEED661002A3963 /* HomeViewController.swift in Sources */,
+				1EC061721DF021D300E5AD35 /* UIView + Extention.swift in Sources */,
 				1E43DA581DEED661002A3963 /* QRScanController.swift in Sources */,
 				1E43DA4C1DEED661002A3963 /* DetailViewController.swift in Sources */,
 				1E43DA5B1DEED661002A3963 /* shareViewController.swift in Sources */,

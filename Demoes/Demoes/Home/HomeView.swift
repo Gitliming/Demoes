@@ -51,7 +51,8 @@ class HomeView: UITableView, UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         let vcClass = (ActionArray[indexPath.row].ActionVc) as! UIViewController.Type
         let vc = vcClass.init()
-        NSNotificationCenter.defaultCenter().postNotificationName("push", object: vc)
+        guard let parentVc = self.getSelfController(self)else{return false}
+        (parentVc.navigationController as! CustomAnimaViewNavigation).pushViewController(vc, Rect: CGRect(origin: parentVc.view.center, size: CGSizeZero), animated: true)
         return false
     }
 }
