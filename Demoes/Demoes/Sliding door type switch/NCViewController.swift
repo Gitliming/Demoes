@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NCViewController: UIViewController,UIGestureRecognizerDelegate {
+class NCViewController: BaseViewController, UIGestureRecognizerDelegate {
     @IBOutlet var NEwView: UIView!
     
     var name:String?
