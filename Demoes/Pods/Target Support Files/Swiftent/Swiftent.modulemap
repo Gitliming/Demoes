@@ -1,0 +1,6 @@
+framework module Swiftent {
+  umbrella header "Swiftent-umbrella.h"
+
+  export *
+  module * { export * }
+}
