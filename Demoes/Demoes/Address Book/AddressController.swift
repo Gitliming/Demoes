@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddressController: UIViewController {
+class AddressController: BaseViewController {
     var loginBtn:UIButton?
 
     override func viewDidLoad() {

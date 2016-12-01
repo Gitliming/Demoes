@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class QRScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate ,UIAlertViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class QRScanController: BaseViewController, AVCaptureMetadataOutputObjectsDelegate ,UIAlertViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     var scanView:ScanView?
     var guideLabel:UILabel?

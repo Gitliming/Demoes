@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShowQRController: UIViewController {
+class ShowQRController: BaseViewController {
     var QrImgView:UIImageView?
     var saveButton:UIButton?
     var message:String = ""

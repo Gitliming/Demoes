@@ -8,7 +8,7 @@
 
 import UIKit
 
-class shareViewController: UIViewController {
+class shareViewController: BaseViewController {
     @IBOutlet weak var shareContentView: UIView!
     var firstY:CGFloat?
     override func viewDidLoad() {
@@ -26,6 +26,7 @@ class shareViewController: UIViewController {
         firstY = shareContentView.frame.origin.y
         shareContentView.frame.origin.y = view.frame.maxY
         animating(self.parentViewController!)
+        bindShareAction()
     }
     @IBAction func viewTap(sender: AnyObject) {
         animating(self.parentViewController!)
@@ -41,6 +42,39 @@ class shareViewController: UIViewController {
         UIView.animateWithDuration(0.3, animations: {
             self.shareContentView.frame.origin.y = self.firstY!
             })
+        }
+    }
+    //MARK:-- 绑定分享点击事件
+    func bindShareAction (){
+        let contentViews = shareContentView.subviews
+        for v in contentViews {
+            for btn in v.subviews{
+                if btn.isKindOfClass(UIButton){
+                (btn as! UIButton).addTarget(self, action: #selector(shareViewController.shareAction(_:)), forControlEvents: .TouchUpInside)
+                }
+            }
+        }
+    }
+    func shareAction (button:UIButton){
+        switch button.tag {
+        case 0://QQ
+            print(button.tag)
+        case 1://QZone
+            print(button.tag)
+        case 2://weichat
+            print(button.tag)
+        case 3://friends
+            print(button.tag)
+        case 4://xinlang
+            print(button.tag)
+        case 5://wangye
+            print(button.tag)
+        case 6://refresh
+            print(button.tag)
+        case 7://youjian
+            print(button.tag)
+
+        default: break
         }
     }
 }

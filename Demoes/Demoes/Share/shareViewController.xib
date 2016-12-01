@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="shareViewController" customModule="Dispersive_switch" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="shareViewController" customModule="Demoes" customModuleProvider="target">
             <connections>
                 <outlet property="shareContentView" destination="3c4-lE-QeI" id="Aao-wP-ntc"/>
                 <outlet property="view" destination="feg-r4-XxB" id="FTP-r2-HoB"/>
@@ -41,7 +41,7 @@
                                     </constraints>
                                     <state key="normal" backgroundImage="share_zone"/>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngl-4N-slt">
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngl-4N-slt">
                                     <rect key="frame" x="200" y="10" width="75" height="75"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="Ngl-4N-slt" secondAttribute="height" multiplier="1:1" id="QBh-vD-Hga"/>
@@ -87,7 +87,7 @@
                                 <constraint firstItem="MCN-CI-Lw6" firstAttribute="baseline" secondItem="XUd-cn-g3u" secondAttribute="baseline" id="zWK-xX-1Mn"/>
                             </constraints>
                         </scrollView>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKY-Oj-k9r">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKY-Oj-k9r">
                             <rect key="frame" x="0.0" y="105" width="375" height="95"/>
                             <subviews>
                                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qn4-aj-qx6">

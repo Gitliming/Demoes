@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class InputController: UIViewController {
+class InputController: BaseViewController {
 
     var intputFile:UITextField?
     var outputButton:UIButton?
