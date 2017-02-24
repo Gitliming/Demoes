@@ -52,6 +52,7 @@ class NCViewController: BaseViewController, UIGestureRecognizerDelegate {
     func share() {
         if self.childViewControllers.count < 1{
         let shareVc = shareViewController(nibName: "shareViewController", bundle: nil)
+//            shareVc.view.frame = view.frame
             UIViewController.showViewController(self, VC: shareVc)
         }
     }

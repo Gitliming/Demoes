@@ -40,17 +40,22 @@ class InputController: BaseViewController {
     }
     
     func scanAction(){
-        let authorionSatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+//        let authorionSatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
         let scanVc = QRScanController()
-        if authorionSatus == AVAuthorizationStatus.Authorized{
+//        if authorionSatus != AVAuthorizationStatus.Authorized{
             let rect = CGRect(origin: view.center, size: CGSizeZero)
             (navigationController as! CustomAnimaViewNavigation).pushViewController(scanVc, Rect: rect, animated: true)
-        }else{
-            let alertVC = UIAlertController(title: "提示", message: "您的相机权限尚未开启，请前往设置", preferredStyle: .ActionSheet)
-            let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
-            alertVC.addAction(cancelAction)
-            self.presentViewController(alertVC, animated: true, completion: nil)
-        }
+//        }else{
+//            let url = NSURL(string: UIApplicationOpenSettingsURLString)
+//            
+//            if UIApplication.sharedApplication().canOpenURL(url!) == true{
+//                UIApplication.sharedApplication().openURL(url!, options:[:], completionHandler: nil)
+//            }
+//            let alertVC = UIAlertController(title: "提示", message: "您的相机权限尚未开启，请前往设置", preferredStyle: .ActionSheet)
+//            let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
+//            alertVC.addAction(cancelAction)
+//            self.presentViewController(alertVC, animated: true, completion: nil)
+//        }
     }
     
     func outputAction(){

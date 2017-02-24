@@ -49,6 +49,13 @@
 - (void)destroyModule;
 
 /*!
+ 当前登陆的用户信息变化的回调
+ 
+ @param userInfo 当前登陆的用户信息
+ */
+- (void)didCurrentUserInfoUpdated:(RCUserInfo *)userInfo;
+
+/*!
  处理收到的消息
  
  @param message  收到的消息
@@ -94,14 +101,14 @@
 
 #pragma mark - Input Bar
 /*!
- 获取会话界面的plugin board item信息。
+ 获取会话页面的plugin board item信息。
  
  @param conversationType  会话类型
  @param targetId          targetId
  
  @return plugin board item信息列表。
  
- @discussion 当进入到会话界面时，SDK需要注册扩展面部区域的item。
+ @discussion 当进入到会话页面时，SDK需要注册扩展面部区域的item。
  */
 - (NSArray<RCExtensionPluginItemInfo *> *)getPluginBoardItemInfoList:(RCConversationType)conversationType
                                                     targetId:(NSString *)targetId;
@@ -148,6 +155,30 @@
 - (void)inputTextViewDidChange:(UITextView *)inputTextView
                     inInputBar:(RCChatSessionInputBarControl *)inputBarControl;
 
+/*!
+ 输入工具栏状态发生变化的回调
+ 
+ @param status           输入工具栏当前状态
+ @param inputBarControl  输入工具栏
+ */
+
+- (void)inputBarStatusDidChange:(KBottomBarStatus)status
+                     inInputBar:(RCChatSessionInputBarControl *)inputBarControl;
+
+
+/*!
+ 是否需要显示表情加号按钮
+
+ @param inputBarControl  输入工具栏
+ */
+- (BOOL)isEmoticonAddButtonEnabled:(RCChatSessionInputBarControl *)inputBarControl;
+
+/*!
+ 是否需要显示表情设置按钮
+ 
+ @param inputBarControl  输入工具栏
+ */
+- (BOOL)isEmoticonSettingButtonEnabled:(RCChatSessionInputBarControl *)inputBarControl;
 ///*!
 // 点击加号面板中按钮的回调
 // 
@@ -158,4 +189,14 @@
 //- (void)pluginBoard:(RCPluginBoardView *)pluginBoardView
 // clickedItemWithTag:(NSInteger)tag
 //         inInputBar:(RCChatSessionInputBarControl *)inputBarControl;
+
+/*!
+ 是否正在使用声音通道
+ */
+- (BOOL)isAudioHolding;
+
+/*!
+ 是否正在使用摄像头
+ */
+- (BOOL)isCameraHolding;
 @end

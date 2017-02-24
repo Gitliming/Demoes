@@ -483,7 +483,7 @@
 
 
 /*!
- 发送媒体消息（图片消息或文本消息）
+ 发送媒体消息（图片消息或文件消息）
  
  @param conversationType    发送消息的会话类型
  @param targetId            发送消息的目标会话ID
@@ -1001,6 +1001,22 @@ FOUNDATION_EXPORT NSString *const RCLibDispatchReadReceiptNotification;
                               time:(long long)timestamp
                            success:(void (^)())successBlock
                              error:(void (^)(RCErrorCode nErrorCode))errorBlock;
+
+/*!
+ 撤回消息
+ 
+ @param message      需要撤回的消息
+ @param pushContent 当下发 push 消息时，在通知栏里会显示这个字段。如果不设置该字段，无法接受到 push 推送。
+ @param successBlock 撤回成功的回调 [messageId:撤回的消息ID，该消息已经变更为新的消息]
+ @param errorBlock   撤回失败的回调 [errorCode:撤回失败错误码]
+ 
+ @warning 仅支持单聊、群组和讨论组。
+ */
+- (void)recallMessage:(RCMessage *)message
+          pushContent:(NSString *)pushContent
+              success:(void (^)(long messageId))successBlock
+                error:(void(^)(RCErrorCode errorcode))errorBlock;
+
 
 /*!
  撤回消息
@@ -1770,7 +1786,7 @@ getConversationNotificationStatus:(RCConversationType)conversationType
 
  @discussion
  可以通过传入的messageCount设置加入聊天室成功之后，需要获取的历史消息数量。
- -1表示不获取任何历史消息，0表示不特殊设置而使用SDK默认的设置（默认为获取10条），0<messageCount<=50为具体获取的消息数量,最大值为50。
+ -1表示不获取任何历史消息，0表示不特殊设置而使用SDK默认的设置（默认为获取10条），0<messageCount<=50为具体获取的消息数量,最大值为50。注：如果是7.x系统获取历史消息数量不要大于30
  */
 - (void)joinChatRoom:(NSString *)targetId
         messageCount:(int)messageCount
@@ -2101,7 +2117,7 @@ startCustomerService:(NSString *)kefuId
  @discussion 此方法依赖startCustomerService方法。可在客服结束之前或之后调用。
  @discussion
  有些客服服务商需要对机器人回答的词条进行评价，机器人回答的文本消息的extra带有{“robotEva”:”1”,
- “sid”:”xxx”}字段，当用户对这一条消息评价后调用本函数同步到服务器，knownledgedID为extra中的sid。若是离开会话评价，knownledgedID填nil
+ “sid”:”xxx”}字段，当用户对这一条消息评价后调用本函数同步到服务器，knownledgedID为extra中的sid。若是离开会话触发的评价或者在加号扩展中主动触发的评价，knownledgedID填nil
 
  @warning
  如果你使用IMKit，请不要使用此方法。RCConversationViewController默认已经做了处理。
@@ -2121,7 +2137,7 @@ startCustomerService:(NSString *)kefuId
 
  @discussion 此方法依赖startCustomerService方法。可在客服结束之前或之后调用。
  @discussion
- 有些客服服务商会主动邀请评价，pullEvaluationBlock会被调用到，当评价完成后调用本函数同步到服务器，dialogId填pullEvaluationBlock返回的dialogId。若是离开会话触发的评价，dialogID为nil
+ 有些客服服务商会主动邀请评价，pullEvaluationBlock会被调用到，当评价完成后调用本函数同步到服务器，dialogId填pullEvaluationBlock返回的dialogId。若是离开会话触发的评价或者在加号扩展中主动触发的评价，dialogID为nil
 
  @warning
  如果你使用IMKit，请不要使用此方法。RCConversationViewController默认已经做了处理。
@@ -2131,6 +2147,40 @@ startCustomerService:(NSString *)kefuId
                      humanValue:(int)value
                         suggest:(NSString *)suggest;
 
+/*!
+ 通用客服评价，不区分机器人人工
+ 
+ @param kefuId                客服ID
+ @param dialogId              对话ID，客服请求评价的对话ID
+ @param value                 分数，取值范围1-5
+ @param suggest               客户建议
+ @param resolveStatus         解决状态，取值范围0-2
+ @discussion 此方法依赖startCustomerService方法。可在客服结束之前或之后调用。
+ @discussion
+ 有些客服服务商会主动邀请评价，pullEvaluationBlock会被调用到，当评价完成后调用本函数同步到服务器，dialogId填pullEvaluationBlock返回的dialogId。若是离开会话触发的评价或者在加号扩展中主动触发的评价，dialogID为nil
+ @warning
+ 如果你使用IMKit，请不要使用此方法。RCConversationViewController默认已经做了处理。
+ */
+- (void)evaluateCustomerService:(NSString *)kefuId
+                       dialogId:(NSString *)dialogId
+                     starValue:(int)value
+                        suggest:(NSString *)suggest
+                  resolveStatus:(RCCSResolveStatus)resolveStatus;
+
+/*!
+ 客服留言
+ 
+ @param kefuId                客服ID
+ @param leaveMessageDic       客服留言信息字典，根据RCCSLeaveMessageItem中关于留言的配置存储对应的key-value
+ @discussion 此方法依赖startCustomerService方法。可在客服结束之前或之后调用。
+ @discussion 如果一些值没有，可以传nil
+ @warning
+ 如果你使用IMKit，请不要使用此方法。RCConversationViewController默认已经做了处理。
+ */
+- (void)leaveMessageCustomerService:(NSString *)kefuId
+                    leaveMessageDic:(NSDictionary *)leaveMessageDic
+                            success:(void (^)())successBlock
+                               failure:(void (^)())failureBlock;
 #pragma mark - 搜索
 
 /*!

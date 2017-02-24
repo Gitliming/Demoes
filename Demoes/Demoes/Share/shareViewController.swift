@@ -22,6 +22,8 @@ class shareViewController: BaseViewController {
     }
     
     func setUI() {
+        view.frame = UIScreen.mainScreen().bounds
+        view.layoutIfNeeded()
         shareContentView.layer.contents = UIImage(named: "share_bg")?.CGImage
         firstY = shareContentView.frame.origin.y
         shareContentView.frame.origin.y = view.frame.maxY
@@ -59,6 +61,19 @@ class shareViewController: BaseViewController {
         switch button.tag {
         case 0://QQ
             print(button.tag)
+//            for i in 0 ..< 10000 {
+//                if i % 1 == 0
+//                && i % 2 == 1
+//                && i % 3 == 0
+//                && i % 4 == 1
+//                && i % 5 == 1
+//                && i % 6 == 3
+//                && i % 7 == 0
+//                && i % 8 == 1
+//                    && i % 9 == 0 {
+//                print("符合条件的\(i)")
+//                }
+//            }
         case 1://QZone
             print(button.tag)
         case 2://weichat
