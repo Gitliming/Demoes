@@ -36,6 +36,7 @@
 		1EC061721DF021D300E5AD35 /* UIView + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC061711DF021D300E5AD35 /* UIView + Extention.swift */; };
 		1EE501CD1DEFCA3500F6B308 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EE501CC1DEFCA3500F6B308 /* Images.xcassets */; };
 		AFD5CD2B7A3CDF7172C871AA /* Pods_Demoes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4535766391C58BF246C5A1 /* Pods_Demoes.framework */; };
+		DA5042CB1E60772500D87993 /* AppStatusOberver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5042CA1E60772500D87993 /* AppStatusOberver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		3A4535766391C58BF246C5A1 /* Pods_Demoes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demoes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6991A355B3C938EC19282BC8 /* Pods-Demoes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demoes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demoes/Pods-Demoes.debug.xcconfig"; sourceTree = "<group>"; };
 		6C56637747661226C0BFEF90 /* Pods-Demoes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demoes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demoes/Pods-Demoes.release.xcconfig"; sourceTree = "<group>"; };
+		DA5042CA1E60772500D87993 /* AppStatusOberver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStatusOberver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				1EC0616F1DF014DD00E5AD35 /* BaseViewController.swift */,
+				DA5042CA1E60772500D87993 /* AppStatusOberver.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				1E43DA5A1DEED661002A3963 /* ShowQRController.swift in Sources */,
 				1E991E451DEC346800723671 /* AppDelegate.swift in Sources */,
 				1E43DA521DEED661002A3963 /* HomeView.swift in Sources */,
+				DA5042CB1E60772500D87993 /* AppStatusOberver.swift in Sources */,
 				1E43DA4B1DEED661002A3963 /* AddressController.swift in Sources */,
 				1E43DA501DEED661002A3963 /* NavigationItem + Extension.swift in Sources */,
 				1E43DA591DEED661002A3963 /* ScanView.swift in Sources */,
