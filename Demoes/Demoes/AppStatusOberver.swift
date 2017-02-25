@@ -13,4 +13,7 @@ class AppStatusOberver: NSObject {
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         print("app进入--\(change![NSKeyValueChangeNewKey])")
     }
+    deinit {
+        removeObserver(self, forKeyPath: "appStatus")
+    }
 }
