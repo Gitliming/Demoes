@@ -20,22 +20,17 @@ class ActionModel: NSObject {
         for (k, v) in ActionList {
             
             let mod = Model()
-            let vc:AnyClass? = swiftClassFromString(v)
+            let vc:AnyClass? = UIViewController.swiftClassFromString(v)
             if vc == nil {continue}
             mod.ActionName = k
             mod.ActionVc = vc
             modelArray.append(mod)
         }
-        
     }
     func swiftClassFromString(className: String) -> AnyClass! {
         // get the project name
         if  let appName: String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as! String? {
-//            let indexStart = appName.startIndex.advancedBy(10)
-//            let indexEnd = appName.endIndex.advancedBy(-6)
-//            let subStr = appName.substringToIndex(indexStart)
-//            let subStr2 = appName.substringFromIndex(indexEnd)
-//            let endName = "\(subStr)_\(subStr2)"
+        //  如果appName中有空格，会用“——”代替
             let classStringName = "\(appName).\(className)"
         // return the class!
             return NSClassFromString(classStringName)

@@ -23,4 +23,21 @@ extension UIViewController{
             VC.view.removeFromSuperview()
         }
     }
+    //MARK:--根据类名转换类
+    class func swiftClassFromString(className: String) -> AnyClass! {
+        // get the project name
+        if  let appName: String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as! String? {
+            //            let indexStart = appName.startIndex.advancedBy(10)
+            //            let indexEnd = appName.endIndex.advancedBy(-6)
+            //            let subStr = appName.substringToIndex(indexStart)
+            //            let subStr2 = appName.substringFromIndex(indexEnd)
+            //            let endName = "\(subStr)_\(subStr2)" 如果appName中有空格，会用“——”代替
+
+            let classStringName = "\(appName).\(className)"
+            // return the class!
+            return NSClassFromString(classStringName)
+        }
+        return nil;
+    }
+
 }
