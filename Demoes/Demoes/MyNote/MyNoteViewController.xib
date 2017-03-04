@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyNoteViewController" customModule="Demoes" customModuleProvider="target">
+            <connections>
+                <outlet property="bottomButton" destination="SMl-NU-JVL" id="12C-kC-MXj"/>
+                <outlet property="noteListView" destination="VAO-46-mIM" id="CPQ-5G-tnY"/>
+                <outlet property="noteNumber" destination="h9O-6K-qXY" id="zWU-Z1-JlC"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yIV-N8-XbM">
+                    <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <items>
+                        <barButtonItem title="10个笔记" id="h9O-6K-qXY">
+                            <color key="tintColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Oph-V2-8P9"/>
+                        <barButtonItem title="＋ 新增笔记" id="SMl-NU-JVL">
+                            <color key="tintColor" red="0.75166666666666671" green="0.0" blue="0.0037384494949363016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="newNote:" destination="-1" id="beS-sU-E4a"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                    <color key="barTintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </toolbar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VAO-46-mIM" customClass="MyNoteListView" customModule="Demoes" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="yIV-N8-XbM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BEE-ES-rgA"/>
+                <constraint firstAttribute="trailing" secondItem="VAO-46-mIM" secondAttribute="trailing" id="Da6-Fs-H5p"/>
+                <constraint firstAttribute="bottom" secondItem="yIV-N8-XbM" secondAttribute="bottom" id="Gh0-dL-YFB"/>
+                <constraint firstItem="VAO-46-mIM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="KcT-hH-eab"/>
+                <constraint firstItem="VAO-46-mIM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="N0F-76-sld"/>
+                <constraint firstItem="yIV-N8-XbM" firstAttribute="top" secondItem="VAO-46-mIM" secondAttribute="bottom" id="gST-zn-bb0"/>
+                <constraint firstAttribute="trailing" secondItem="yIV-N8-XbM" secondAttribute="trailing" id="snS-4Z-JaG"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
