@@ -68,7 +68,7 @@ class MyNoteViewController: UIViewController {
     //新增笔记/删除笔记
     @IBAction func newNote(sender: AnyObject) {
         if noteListView.edite == false{
-        let vc = UIViewController()//NewNoteViewController(nibName: "NewNoteViewController", bundle: nil)
+        let vc = NewNoteViewController(nibName: "NewNoteViewController", bundle: nil)
         navigationController?.pushViewController(vc, animated: true)
         }else{
             if noteListView.deleteNotes.count > 0 {

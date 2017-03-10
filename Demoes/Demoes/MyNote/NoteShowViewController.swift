@@ -8,9 +8,8 @@
 
 import UIKit
 
-class NoteShowViewController: UIViewController {
+class NoteShowViewController: NewNoteViewController {
     var noteModel:MyNote?
-    var noteView:UITextView?
     override func viewDidLoad() {
         super.viewDidLoad()
         UI()
@@ -26,7 +25,7 @@ class NoteShowViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     //编辑笔记
-     func addNote() {
+    override func addNote() {
         if noteView!.text == noteModel?.desc{
             navigationController?.popViewControllerAnimated(true)
             return

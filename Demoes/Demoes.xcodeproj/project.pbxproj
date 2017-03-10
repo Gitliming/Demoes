@@ -44,6 +44,8 @@
 		DAAB74781E6AD3A9009B3524 /* MyNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAAB74721E6AD3A9009B3524 /* MyNoteViewController.xib */; };
 		DAAB74791E6AD3A9009B3524 /* NoteShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB74731E6AD3A9009B3524 /* NoteShowViewController.swift */; };
 		DAAB747B1E6AF82F009B3524 /* MyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB747A1E6AF82F009B3524 /* MyNote.swift */; };
+		DADBC29D1E72F37F00066028 /* NewNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADBC29B1E72F37F00066028 /* NewNoteViewController.xib */; };
+		DADBC2A01E72F3FD00066028 /* NewNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBC29F1E72F3FD00066028 /* NewNoteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +109,8 @@
 		DAAB74721E6AD3A9009B3524 /* MyNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyNoteViewController.xib; sourceTree = "<group>"; };
 		DAAB74731E6AD3A9009B3524 /* NoteShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteShowViewController.swift; sourceTree = "<group>"; };
 		DAAB747A1E6AF82F009B3524 /* MyNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNote.swift; sourceTree = "<group>"; };
+		DADBC29B1E72F37F00066028 /* NewNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewNoteViewController.xib; sourceTree = "<group>"; };
+		DADBC29F1E72F3FD00066028 /* NewNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewNoteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +298,8 @@
 			isa = PBXGroup;
 			children = (
 				DAAB747A1E6AF82F009B3524 /* MyNote.swift */,
+				DADBC29F1E72F3FD00066028 /* NewNoteViewController.swift */,
+				DADBC29B1E72F37F00066028 /* NewNoteViewController.xib */,
 				DAAB746E1E6AD3A9009B3524 /* MyNoteCell.swift */,
 				DAAB746F1E6AD3A9009B3524 /* MyNoteCell.xib */,
 				DAAB74701E6AD3A9009B3524 /* MyNoteListView.swift */,
@@ -427,6 +433,7 @@
 				1E43DA5F1DEED661002A3963 /* textXIb.xib in Resources */,
 				DAAB74781E6AD3A9009B3524 /* MyNoteViewController.xib in Resources */,
 				1E991E4A1DEC346800723671 /* Main.storyboard in Resources */,
+				DADBC29D1E72F37F00066028 /* NewNoteViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +515,7 @@
 				1E43DA541DEED661002A3963 /* Model.swift in Sources */,
 				1EC061701DF014DD00E5AD35 /* BaseViewController.swift in Sources */,
 				1E43DA5A1DEED661002A3963 /* ShowQRController.swift in Sources */,
+				DADBC2A01E72F3FD00066028 /* NewNoteViewController.swift in Sources */,
 				1E991E451DEC346800723671 /* AppDelegate.swift in Sources */,
 				1E43DA521DEED661002A3963 /* HomeView.swift in Sources */,
 				DA5042CB1E60772500D87993 /* AppStatusOberver.swift in Sources */,
