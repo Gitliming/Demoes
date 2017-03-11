@@ -13,7 +13,7 @@ class MyNote:NSObject  {
     var id: String = ""
     var title: String = ""
     var desc: String = ""
-    var createTime: NSTimeInterval = NSDate().timeIntervalSince1970
+    var createTime: String = ""
 //    var updateTime: NSTimeInterval = NSDate().timeIntervalSince1970
 
 //    required init?(_ map: Map) {
@@ -27,7 +27,7 @@ class MyNote:NSObject  {
 //        createTime <- map["createTime"]
 //        updateTime <- map["updateTime"]
 //    }
-    init(id:String, title:String, desc:String, createTime:NSTimeInterval) {
+    init(id:String, title:String, desc:String, createTime:String) {
         self.id = id
         self.title = title
         self.desc = desc

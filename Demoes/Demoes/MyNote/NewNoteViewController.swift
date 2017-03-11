@@ -10,6 +10,7 @@ import UIKit
 
 class NewNoteViewController: UIViewController {
     @IBOutlet weak var noteView: UITextView!
+     var dateFormatter = NSDateFormatter()
     override func viewDidLoad() {
         super.viewDidLoad()
         setTitle()
@@ -40,14 +41,22 @@ class NewNoteViewController: UIViewController {
             title = desc.substringToIndex(indexstart)
         }
         title = desc
-        
+        creatNoteModel(title!, desc: desc)
 //            api.manageNote.put(["title":title!, "desc":desc],callback: { (response:LDApiResponse<MyNote>) in
 //            response.success({ (msg) in
 //              self.navigationController?.popViewControllerAnimated(true)
 //            })
 //        })
     }
-    
+    func creatNoteModel(title:String, desc:String){
+        let timeInterver = NSDate().timeIntervalSinceNow
+        let time = NSDate(timeIntervalSinceNow: timeInterver)
+        dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
+        let timeString = dateFormatter.stringFromDate(time)
+        print("===========\(timeString)")
+        let noteModel = MyNote(id: timeString, title: title, desc: desc, createTime: timeString)
+        
+    }
     
     func beginInput(){
         if noteView.text == "请输入内容" {

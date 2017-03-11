@@ -11,7 +11,7 @@ import Foundation
 struct Notifications {
     static let notificationCenter = NSNotificationCenter.defaultCenter()
 //    通知注册处：
-    static var beginInputNote = delegate(name: "beginInputNote")
+    static var beginInputNote = delegate(name: "UITextViewTextDidBeginEditingNotification")
     
     class delegate {
         private let name:String
@@ -22,7 +22,7 @@ struct Notifications {
         
 //        MARK:-- post notification
         func post(object:AnyObject?){
-            asyn { 
+            asyn {
                 notificationCenter.postNotificationName(self.name, object: object)
             }
         }
