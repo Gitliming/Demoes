@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyNoteViewController: UIViewController {
+class MyNoteViewController: UIViewController, noteDelegate {
     
     @IBOutlet weak var noteNumber: UIBarButtonItem!
     @IBOutlet weak var noteListView: MyNoteListView!
@@ -35,7 +35,7 @@ class MyNoteViewController: UIViewController {
         title = "我的笔记"
         let item = UIBarButtonItem(title: "返回", style: .Plain, target: self, action: nil)
         self.navigationItem.backBarButtonItem = item
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: getLocString("edit"), style: .Plain, target: self, action: #selector(MyNoteViewController.editNote))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title:"编辑", style: .Plain, target: self, action: #selector(MyNoteViewController.editNote))
         noteListView.edite = false
         bottomButton.title = "＋ 新增笔记"
         }else{
@@ -44,6 +44,12 @@ class MyNoteViewController: UIViewController {
             noteListView.edite = true
         }
     }
+    //  MARK:--  noteDelegate
+    func addNewNote(note: MyNote) {
+        noteListView.notes.append(note)
+        noteListView.reloadData()
+    }
+
     //清理标记
     private  func clearSelected(){
         for cell in noteListView.visibleCells{
@@ -69,41 +75,30 @@ class MyNoteViewController: UIViewController {
     @IBAction func newNote(sender: AnyObject) {
         if noteListView.edite == false{
         let vc = NewNoteViewController(nibName: "NewNoteViewController", bundle: nil)
+            vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
         }else{
             if noteListView.deleteNotes.count > 0 {
-                
-                var ids = [String]()
-                
-                for note in noteListView.deleteNotes{
-                    ids.append(note.id)
-                }
-                deleteNoteFromService(ids)
-               
-                
-                for delNote in noteListView.deleteNotes{
-                    for (index,note) in noteListView.notes.enumerate(){
-                        if delNote.id == note.id{
-                            noteListView.notes.removeAtIndex(index)
-                        }
-                    }
-                }
-                noteListView.deleteNotes.removeAll()
+                deleteNoteFromService(noteListView.deleteNotes)
+                self.noteListView.edite = false
+                self.setupUI()
             }else{
 //                toast("请选择要删除的笔记")
             }
         }
     }
     //删除服务器数据
-    func deleteNoteFromService(ids:[String]?){
+    func deleteNoteFromService(ids:[MyNote]?){
 //        api.manageNote.delete(["id":ids!]) { (response:LDApiResponse<MyNote>) in
 //            response.success({ (msg) in
-                self.noteListView.edite = false
-                self.noteListView.reloadData()
-                self.setupUI()
-                self.noteListView.total -= ids!.count
 //            })
-//        }
+        for delNote in ids!{
+            for (index,note) in noteListView.notes.enumerate(){
+                if delNote.id == note.id{
+                    noteListView.notes.removeAtIndex(index)
+                }
+            }
+        }
+        noteListView.reloadData()
     }
-
 }

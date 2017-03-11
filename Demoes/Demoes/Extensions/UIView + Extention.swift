@@ -22,7 +22,7 @@ extension UIView{
     
 //    spliteLine 
     class func spliteLine(margin:CGFloat? = 10) -> UIView{
-    let line = UIView(frame:CGRectMake(margin!, 0, screenWidth - 2 * margin!, 1/screenScare))
+    let line = UIView(frame:CGRectMake(margin!, 0, screenWidth - 2 * margin!, 2/screenScare))
     line.backgroundColor = UIColor.groupTableViewBackgroundColor()
     return line
     }

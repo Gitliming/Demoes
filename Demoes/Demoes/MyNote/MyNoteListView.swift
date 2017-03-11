@@ -15,7 +15,12 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
             (vc as? MyNoteViewController)?.noteNumber.title = "\(total)个笔记"
         }}
     
-    var notes = [MyNote]()
+    var notes = [MyNote](){
+        didSet{
+//        reloadData()
+        total = notes.count
+        }
+    }
     
     var deleteNotes = [MyNote]()
     
@@ -36,7 +41,7 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         registerNib(UINib(nibName:notecell, bundle: nil), forCellReuseIdentifier: notecell)
-        tableFooterView = UIView.spliteLine(10)
+        tableFooterView = UIView.spliteLine(15)
         rowHeight = 60
         dataSource = self
         delegate = self
@@ -148,9 +153,8 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if editingStyle == .Delete{
-
             let note = notes[indexPath.row]
-                    self.notes.removeAtIndex(indexPath.row)
+            self.notes.removeAtIndex(indexPath.row)
             for (index,data) in deleteNotes.enumerate(){
                 
                 if note.id == data.id{
@@ -158,11 +162,14 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
                     break
                 }
             }
+//             guard let vc = UIView.getSelfController(self)else{return}
+//             (vc as? MyNoteViewController)?.deleteNoteFromService([note])
+        
+ 
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
-            guard let vc = UIView.getSelfController(self)else{return}
-            (vc as? MyNoteViewController)?.deleteNoteFromService([note.id])
         }
     }
+        
     //MARK:-- MJTableViewRefreshDelegate
 //    func tableView(tableView: LDTableView, refreshDataWithType refreshType: LDTableView.RefreshType) {
 //        
