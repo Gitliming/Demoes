@@ -11,7 +11,7 @@ import UIKit
 class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDataSource, UITableViewDelegate {
     var total = 0 {
         didSet{
-            guard let vc = controller(self) else{return}
+            guard let vc = UIView.getSelfController(self)else{return}
             (vc as? MyNoteViewController)?.noteNumber.title = "\(total)个笔记"
         }}
     
@@ -36,7 +36,7 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         registerNib(UINib(nibName:notecell, bundle: nil), forCellReuseIdentifier: notecell)
-//        tableFooterView = UIView.separator()
+        tableFooterView = UIView.spliteLine(10)
         rowHeight = 60
         dataSource = self
         delegate = self
@@ -109,7 +109,7 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let note = notes[indexPath.row]
         if !edite{
-//            Notifications.toNoteDetail.post(note)
+            toShowNote(note)
             return
         }
         
@@ -159,20 +159,9 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
                 }
             }
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
-            guard let vc = controller(self)else{return}
+            guard let vc = UIView.getSelfController(self)else{return}
             (vc as? MyNoteViewController)?.deleteNoteFromService([note.id])
         }
-    }
-    //获取所在控制器
-    func controller(view:UIView)->UIViewController?{
-        var next:UIView? = view
-        repeat{
-            if let nextResponder = next?.nextResponder() where nextResponder.isKindOfClass(UIViewController.self){
-                return (nextResponder as! UIViewController)
-            }
-            next = next?.superview
-        }while next != nil
-        return nil
     }
     //MARK:-- MJTableViewRefreshDelegate
 //    func tableView(tableView: LDTableView, refreshDataWithType refreshType: LDTableView.RefreshType) {
@@ -190,6 +179,13 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
 //        configRefreshable(headerEnabled: true, footerEnabled: true)
 //        mj_header.beginRefreshing()
 //    }
+    func toShowNote(note:MyNote){
+        let vc = NoteShowViewController(nibName: "NewNoteViewController", bundle: nil)
+        vc.noteModel = note
+        guard let VC = UIView.getSelfController(self)else{return}
+        (VC as! MyNoteViewController).navigationController?.pushViewController(vc, animated: true)
+    }
+
     //补充上拉刷新
     func bottomRefresh(){
          refreshFooter = UIActivityIndicatorView(frame: CGRect(x: (bounds.width - 44)/2, y: bounds.height - 50, width: 44, height: 44))

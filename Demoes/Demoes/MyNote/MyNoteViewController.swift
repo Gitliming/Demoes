@@ -106,9 +106,4 @@ class MyNoteViewController: UIViewController {
 //        }
     }
 
-    func toShowNote(notifi:NSNotification){
-        let vc = NoteShowViewController(nibName: "NewNoteViewController", bundle: nil)
-        vc.noteModel = notifi.object as? MyNote
-        navigationController?.pushViewController(vc, animated: true)
-    }
 }

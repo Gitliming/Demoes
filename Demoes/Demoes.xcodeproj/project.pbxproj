@@ -46,6 +46,8 @@
 		DAAB747B1E6AF82F009B3524 /* MyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB747A1E6AF82F009B3524 /* MyNote.swift */; };
 		DADBC29D1E72F37F00066028 /* NewNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADBC29B1E72F37F00066028 /* NewNoteViewController.xib */; };
 		DADBC2A01E72F3FD00066028 /* NewNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBC29F1E72F3FD00066028 /* NewNoteViewController.swift */; };
+		DADBC2A31E73CE4100066028 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBC2A21E73CE4100066028 /* Notifications.swift */; };
+		DADBC2A51E73D17500066028 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBC2A41E73D17500066028 /* Functions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +113,8 @@
 		DAAB747A1E6AF82F009B3524 /* MyNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNote.swift; sourceTree = "<group>"; };
 		DADBC29B1E72F37F00066028 /* NewNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewNoteViewController.xib; sourceTree = "<group>"; };
 		DADBC29F1E72F3FD00066028 /* NewNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewNoteViewController.swift; sourceTree = "<group>"; };
+		DADBC2A21E73CE4100066028 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		DADBC2A41E73D17500066028 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +252,7 @@
 		1E991E431DEC346800723671 /* Demoes */ = {
 			isa = PBXGroup;
 			children = (
+				DADBC2A11E73CDAA00066028 /* Common */,
 				1E43DA381DEED661002A3963 /* Home */,
 				1EC0616E1DF014A800E5AD35 /* Base */,
 				1E43DA2D1DEED661002A3963 /* Address Book */,
@@ -308,6 +313,15 @@
 				DAAB74731E6AD3A9009B3524 /* NoteShowViewController.swift */,
 			);
 			path = MyNote;
+			sourceTree = "<group>";
+		};
+		DADBC2A11E73CDAA00066028 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DADBC2A21E73CE4100066028 /* Notifications.swift */,
+				DADBC2A41E73D17500066028 /* Functions.swift */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -508,6 +522,7 @@
 			files = (
 				1E43DA4F1DEED661002A3963 /* NavigateAnimation.swift in Sources */,
 				DAAB74791E6AD3A9009B3524 /* NoteShowViewController.swift in Sources */,
+				DADBC2A31E73CE4100066028 /* Notifications.swift in Sources */,
 				DAAB74771E6AD3A9009B3524 /* MyNoteViewController.swift in Sources */,
 				1E43DA5D1DEED661002A3963 /* NCViewController.swift in Sources */,
 				1E43DA561DEED661002A3963 /* InputController.swift in Sources */,
@@ -530,6 +545,7 @@
 				1E43DA581DEED661002A3963 /* QRScanController.swift in Sources */,
 				1E43DA4C1DEED661002A3963 /* DetailViewController.swift in Sources */,
 				1E43DA5B1DEED661002A3963 /* shareViewController.swift in Sources */,
+				DADBC2A51E73D17500066028 /* Functions.swift in Sources */,
 				1E43DA5E1DEED661002A3963 /* textXIb.swift in Sources */,
 				1E43DA4E1DEED661002A3963 /* CustomAnimaViewNavigation.swift in Sources */,
 				1E43DA4D1DEED661002A3963 /* WaterView.swift in Sources */,

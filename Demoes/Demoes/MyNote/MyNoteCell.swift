@@ -51,7 +51,7 @@ class MyNoteCell: UITableViewCell {
     
         didSet{
             titleLabel.text = noteModel?.title
-            guard let _ = noteModel?.updateTime else{return}
+            guard let _ = noteModel?.createTime else{return}
 //            self.timeLabel.text = NSDate.timeConvert(noteModel?.updateTime)
         }
     }

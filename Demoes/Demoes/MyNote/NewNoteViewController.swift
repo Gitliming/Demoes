@@ -24,7 +24,7 @@ class NewNoteViewController: UIViewController {
     func setTitle(){
         title = "新增笔记"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完成", style: .Plain, target: self, action: #selector(NewNoteViewController.addNote))
-//        Notifications.beginInputNote.addObserver(self, selector: #selector(NewNoteViewController.beginInput))
+        Notifications.beginInputNote.addObserve(self, object: nil, selecter: #selector(NewNoteViewController.beginInput))
     }
     //MARK: 添加完成
     func addNote() {
@@ -40,12 +40,14 @@ class NewNoteViewController: UIViewController {
             title = desc.substringToIndex(indexstart)
         }
         title = desc
+        
 //            api.manageNote.put(["title":title!, "desc":desc],callback: { (response:LDApiResponse<MyNote>) in
 //            response.success({ (msg) in
 //              self.navigationController?.popViewControllerAnimated(true)
 //            })
 //        })
     }
+    
     
     func beginInput(){
         if noteView.text == "请输入内容" {
@@ -55,6 +57,6 @@ class NewNoteViewController: UIViewController {
     }
     
     deinit{
-//        Notifications.beginInputNote.removeObserver(self)
+        Notifications.beginInputNote.removeObserver(self, sender: nil)
     }
 }
