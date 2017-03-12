@@ -29,3 +29,11 @@ func getCurrentTime(isWhole:Bool? = true) -> String{
     let timeString = dateFormatter.stringFromDate(time)
     return timeString
 }
+func alert (title:String? = "", massage:String? = "",completion:(() -> (Void))? = nil){
+    let vc = UIAlertController(title: title, message: massage, preferredStyle: .Alert)
+    vc.addAction(UIAlertAction(title: "朕晓得了！", style: .Default, handler: { (action) in
+        vc.dismissViewControllerAnimated(true, completion: nil)
+        completion?()
+    }))
+    UIViewController.topViewController().presentViewController(vc, animated: true, completion: nil)
+}

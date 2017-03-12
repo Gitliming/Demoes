@@ -39,5 +39,9 @@ extension UIViewController{
         }
         return nil;
     }
-
+    //MARK:-- 获取最上层控制器
+    class func topViewController() -> UIViewController{
+    let rootVc = UIApplication.sharedApplication().keyWindow?.rootViewController?.childViewControllers.first
+        return rootVc!
+    }
 }

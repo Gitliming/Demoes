@@ -32,7 +32,7 @@ class NewNoteViewController: UIViewController {
     //MARK: 添加完成
     func addNote() {
         if noteView.text == "请输入内容" || noteView.textColor == UIColor(red: 0.666667, green: 0.666667, blue: 0.666667, alpha: 1){
-//            alert("请输入内容")
+            alert(massage: "请输入内容")
             return
         }
         noteView.endEditing(true)
@@ -44,10 +44,13 @@ class NewNoteViewController: UIViewController {
         }
         title = desc
         let timeString = getCurrentTime()
-        print("===========\(timeString)")
         let noteModel = MyNote(id: timeString, title: title!, desc: desc, createTime: timeString)
         guard let _ = delegate else{return}
         delegate?.addNewNote(noteModel)
+        weak var weakSelf = self
+        alert(massage: "已添加") { () -> (Void) in
+            weakSelf!.navigationController?.popViewControllerAnimated(true)
+        }
 //            api.manageNote.put(["title":title!, "desc":desc],callback: { (response:LDApiResponse<MyNote>) in
 //            response.success({ (msg) in
 //              self.navigationController?.popViewControllerAnimated(true)

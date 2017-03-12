@@ -17,8 +17,10 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
     
     var notes = [MyNote](){
         didSet{
-//        reloadData()
         total = notes.count
+        if total == 0{
+            alert(massage: "没有笔记")
+            }
         }
     }
     
