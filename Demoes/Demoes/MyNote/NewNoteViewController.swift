@@ -31,7 +31,9 @@ class NewNoteViewController: UIViewController {
     }
     //MARK: 添加完成
     func addNote() {
-        if noteView.text == "请输入内容" || noteView.textColor == UIColor(red: 0.666667, green: 0.666667, blue: 0.666667, alpha: 1){
+        if noteView.text == "请输入内容" ||
+            noteView.text == "" ||
+            noteView.textColor == UIColor(red: 0.666667, green: 0.666667, blue: 0.666667, alpha: 1){
             alert(massage: "请输入内容")
             return
         }
