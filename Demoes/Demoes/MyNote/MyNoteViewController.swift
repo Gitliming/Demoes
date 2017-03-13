@@ -16,6 +16,7 @@ class MyNoteViewController: UIViewController, noteDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        noteListView.getNoteList()
 //        Notifications.toNoteDetail.addObserver(self, selector: #selector(MyNoteViewController.toShowNote(_:)), sender: nil)
     }
     

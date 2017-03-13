@@ -20,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 appObserver = AppStatusOberver()
         self.addObserver(appObserver!, forKeyPath: "appStatus", options: .New, context: nil)
         appStatus = "launch---------"
-
+        // 开启数据库
+       // SQLiteManager.SQManager.openDB("Demoes_MyNote.sqlite")
     }
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

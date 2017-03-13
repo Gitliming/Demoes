@@ -51,11 +51,18 @@ class NewNoteViewController: UIViewController {
         alert(massage: "已添加") { () -> (Void) in
             weakSelf!.navigationController?.popViewControllerAnimated(true)
         }
-//            api.manageNote.put(["title":title!, "desc":desc],callback: { (response:LDApiResponse<MyNote>) in
-//            response.success({ (msg) in
-//              self.navigationController?.popViewControllerAnimated(true)
-//            })
-//        })
+        asyn { 
+            weakSelf!.writeNoteINSQ(noteModel)
+        }
+    }
+    func writeNoteINSQ(note:MyNote){
+       let DB = SQLiteManager.SQManager.DB
+        DB?.open()
+        DB?.executeUpdate("INSERT INTO T_MyNote \n" +
+            "(id, title, desc, creatTime) \n" +
+                "VALUES \n" +
+            "(?, ?, ?, ?);", withArgumentsInArray: [note.id, note.title, note.desc, note.createTime])
+        DB?.close()
     }
     func beginInput(){
         if noteView.text == "请输入内容" {

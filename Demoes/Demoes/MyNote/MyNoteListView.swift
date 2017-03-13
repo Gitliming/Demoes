@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDataSource, UITableViewDelegate {
     var total = 0 {
         didSet{
@@ -51,13 +50,27 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
     }
     // MARK: 获取笔记列表
     func getNoteList(isfresh:Bool = true){
-        
+        let DB = SQLiteManager.SQManager.DB
+        DB?.open()
+        guard let result = DB?.executeQuery("SELECT id, title, desc, creatTime FROM T_MyNote;", withArgumentsInArray: nil) else {print("取出失败")
+            return}
+        while result.next() {
+            let id = result.stringForColumn("id")
+            let title = result.stringForColumn("title")
+            let desc = result.stringForColumn("desc")
+            let creatTime = result.stringForColumn("creatTime")
+            let note = MyNote(id: id, title: title, desc: desc, createTime: creatTime)
+            notes.append(note)
+            reloadData()
+        }
+        DB?.close()
         var begin = 0
         if isfresh{
             begin = 0
         }else{
             begin = self.notes.count
         }
+        
 //        guard let _ = Utils.getUser()else{
 //            alert("请登陆后查看！")
 //            self.endRefreshing()

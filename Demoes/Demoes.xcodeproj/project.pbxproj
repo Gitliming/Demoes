@@ -36,6 +36,7 @@
 		1EC061721DF021D300E5AD35 /* UIView + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC061711DF021D300E5AD35 /* UIView + Extention.swift */; };
 		1EE501CD1DEFCA3500F6B308 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EE501CC1DEFCA3500F6B308 /* Images.xcassets */; };
 		AFD5CD2B7A3CDF7172C871AA /* Pods_Demoes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4535766391C58BF246C5A1 /* Pods_Demoes.framework */; };
+		DA05F9AF1E75310C0016ED11 /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05F9AE1E75310C0016ED11 /* SQLiteManager.swift */; };
 		DA5042CB1E60772500D87993 /* AppStatusOberver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5042CA1E60772500D87993 /* AppStatusOberver.swift */; };
 		DAAB74741E6AD3A9009B3524 /* MyNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB746E1E6AD3A9009B3524 /* MyNoteCell.swift */; };
 		DAAB74751E6AD3A9009B3524 /* MyNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAAB746F1E6AD3A9009B3524 /* MyNoteCell.xib */; };
@@ -103,6 +104,7 @@
 		3A4535766391C58BF246C5A1 /* Pods_Demoes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demoes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6991A355B3C938EC19282BC8 /* Pods-Demoes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demoes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demoes/Pods-Demoes.debug.xcconfig"; sourceTree = "<group>"; };
 		6C56637747661226C0BFEF90 /* Pods-Demoes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demoes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demoes/Pods-Demoes.release.xcconfig"; sourceTree = "<group>"; };
+		DA05F9AE1E75310C0016ED11 /* SQLiteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
 		DA5042CA1E60772500D87993 /* AppStatusOberver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStatusOberver.swift; sourceTree = "<group>"; };
 		DAAB746E1E6AD3A9009B3524 /* MyNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNoteCell.swift; sourceTree = "<group>"; };
 		DAAB746F1E6AD3A9009B3524 /* MyNoteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyNoteCell.xib; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 			children = (
 				DADBC2A21E73CE4100066028 /* Notifications.swift */,
 				DADBC2A41E73D17500066028 /* Functions.swift */,
+				DA05F9AE1E75310C0016ED11 /* SQLiteManager.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E43DA4F1DEED661002A3963 /* NavigateAnimation.swift in Sources */,
+				DA05F9AF1E75310C0016ED11 /* SQLiteManager.swift in Sources */,
 				DAAB74791E6AD3A9009B3524 /* NoteShowViewController.swift in Sources */,
 				DADBC2A31E73CE4100066028 /* Notifications.swift in Sources */,
 				DAAB74771E6AD3A9009B3524 /* MyNoteViewController.swift in Sources */,
