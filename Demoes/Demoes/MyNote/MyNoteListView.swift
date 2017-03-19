@@ -129,7 +129,7 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let note = notes[indexPath.row]
         if !edite{
-            toShowNote(note)
+            toShowNote(note, noteIndexPath: indexPath)
             return
         }
         
@@ -201,9 +201,10 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
 //        configRefreshable(headerEnabled: true, footerEnabled: true)
 //        mj_header.beginRefreshing()
 //    }
-    func toShowNote(note:MyNote){
+    func toShowNote(note:MyNote, noteIndexPath:NSIndexPath){
         let vc = NoteShowViewController(nibName: "NewNoteViewController", bundle: nil)
         vc.noteModel = note
+        vc.noteIndexPath = noteIndexPath
         guard let VC = UIView.getSelfController(self)else{return}
         (VC as! MyNoteViewController).navigationController?.pushViewController(vc, animated: true)
     }

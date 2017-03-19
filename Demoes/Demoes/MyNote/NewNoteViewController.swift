@@ -29,6 +29,7 @@ class NewNoteViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完成", style: .Plain, target: self, action: #selector(NewNoteViewController.addNote))
         Notifications.beginInputNote.addObserve(self, object: nil, selecter: #selector(NewNoteViewController.beginInput))
     }
+    
     //MARK: 添加完成
     func addNote() {
         if noteView.text == "请输入内容" ||
@@ -38,15 +39,8 @@ class NewNoteViewController: UIViewController {
             return
         }
         noteView.endEditing(true)
-        let desc = noteView.text
-        var title:String?
-        if desc.characters.count > 20 {
-            let indexstart = desc.startIndex.advancedBy(20)
-            title = desc.substringToIndex(indexstart)
-        }
-        title = desc
         let timeString = getCurrentTime()
-        let noteModel = MyNote(id: timeString, title: title!, desc: desc, createTime: timeString)
+        let noteModel = MyNote(id: timeString, title: cutOutTitle(noteView.text), desc: noteView.text, createTime: timeString)
         guard let _ = delegate else{return}
         delegate?.addNewNote(noteModel)
         weak var weakSelf = self
@@ -57,6 +51,19 @@ class NewNoteViewController: UIViewController {
             weakSelf!.writeNoteINSQ(noteModel)
         }
     }
+    
+    
+    func cutOutTitle(desc:String) -> String{
+        var title:String?
+        if desc.characters.count > 20 {
+            let indexstart = desc.startIndex.advancedBy(20)
+            title = desc.substringToIndex(indexstart)
+        }
+        title = desc
+        return title!
+    }
+    
+    
     func writeNoteINSQ(note:MyNote){
        let DB = SQLiteManager.SQManager.DB
         DB?.open()
@@ -66,12 +73,16 @@ class NewNoteViewController: UIViewController {
             "(?, ?, ?, ?);", withArgumentsInArray: [note.id, note.title, note.desc, note.createTime])
         DB?.close()
     }
+    
+    
     func beginInput(){
         if noteView.text == "请输入内容" {
             noteView.text = ""
         }
         noteView.textColor = UIColor.darkTextColor()
     }
+    
+    
     
     deinit{
         Notifications.beginInputNote.removeObserver(self, sender: nil)
