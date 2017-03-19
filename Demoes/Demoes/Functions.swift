@@ -22,6 +22,11 @@ func asyn_global(mainTask:() -> Void){
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), mainTask)
 }
 
+
+func weakSelf(obj:AnyObject) -> AnyObject? {
+  weak var weakSelf = obj
+    return weakSelf
+}
 func getCurrentTime(isWhole:Bool? = true) -> String{
     let timeInterver = NSDate().timeIntervalSinceNow
     let time = NSDate(timeIntervalSinceNow: timeInterver)

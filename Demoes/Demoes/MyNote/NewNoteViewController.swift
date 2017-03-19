@@ -43,12 +43,11 @@ class NewNoteViewController: UIViewController {
         let noteModel = MyNote(id: timeString, title: cutOutTitle(noteView.text), desc: noteView.text, createTime: timeString)
         guard let _ = delegate else{return}
         delegate?.addNewNote(noteModel)
-        weak var weakSelf = self
         alert(massage: "已添加") { () -> (Void) in
-            weakSelf!.navigationController?.popViewControllerAnimated(true)
+           weakSelf(self)!.navigationController??.popViewControllerAnimated(true)
         }
         asyn_global {
-            weakSelf!.writeNoteINSQ(noteModel)
+            weakSelf(self)!.writeNoteINSQ(noteModel)
         }
     }
     
