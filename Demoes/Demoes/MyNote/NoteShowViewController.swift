@@ -65,7 +65,7 @@ class NoteShowViewController: NewNoteViewController {
         let noteId = noteModel!.id
         let sqStr = "UPDATE T_MyNote \n" + "SET id = '\(noteModel!.createTime)', title = '\(noteModel!.title)', desc = '\(noteModel!.desc)', creatTime = '\(noteModel!.createTime)'\n" + "WHERE id is '\(noteId)'"
         if (DB?.executeUpdate(sqStr, withArgumentsInArray: nil))!{
-            print("更新成功")
+//            print("更新成功")
         }
         DB?.close()
     }

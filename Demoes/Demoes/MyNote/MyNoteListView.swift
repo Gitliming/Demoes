@@ -181,7 +181,7 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
         
         if DB!.executeUpdate(sqStr, withArgumentsInArray: nil){
         
-            print("删除成功")
+//            print("删除成功")
         }
         
         DB?.close()

@@ -12,6 +12,7 @@ class SQLiteManager: NSObject {
 //    工具单例子
     static let SQManager:SQLiteManager = SQLiteManager()
     var DB:FMDatabase?
+    var DBQ:FMDatabaseQueue?
     
     override init() {
         super.init()
@@ -22,6 +23,7 @@ class SQLiteManager: NSObject {
         let path = getCachePath(name!)
         print(path)
         DB = FMDatabase(path: path)
+        DBQ = FMDatabaseQueue(path: path)
         guard let db = DB else {print("数据库对象创建失败")
             return}
         if !db.open(){

@@ -85,21 +85,40 @@ class MyNoteViewController: UIViewController, noteDelegate {
                 self.setupUI()
             }else{
 //                toast("请选择要删除的笔记")
+                alert("请选择要删除的笔记")
             }
         }
     }
     //删除服务器数据
     func deleteNoteFromService(ids:[MyNote]?){
-//        api.manageNote.delete(["id":ids!]) { (response:LDApiResponse<MyNote>) in
-//            response.success({ (msg) in
-//            })
+        var deIds:[String] = [String]()
         for delNote in ids!{
             for (index,note) in noteListView.notes.enumerate(){
                 if delNote.id == note.id{
                     noteListView.notes.removeAtIndex(index)
+                    deIds.append(delNote.id)
                 }
             }
         }
         noteListView.reloadData()
+        asyn_global { 
+           weakSelf(self)!.deleteDatasInDB(deIds)
+        }
+    }
+    
+    
+    func deleteDatasInDB(ids:[String]) {
+        let DB = SQLiteManager.SQManager.DB
+        DB?.open()
+        
+        for id in ids {
+            
+            let sqStr = "DELETE FROM T_MyNote WHERE id is '\(id)';"
+            
+            if (DB?.executeUpdate(sqStr, withArgumentsInArray: nil))! {
+//                print("批量删除成功")
+                }
+            }
+        DB?.close()
     }
 }
