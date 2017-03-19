@@ -18,6 +18,10 @@ func asyn(mainTask:() -> Void) {
     dispatch_async(dispatch_get_main_queue(), mainTask)
 }
 
+func asyn_global(mainTask:() -> Void){
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), mainTask)
+}
+
 func getCurrentTime(isWhole:Bool? = true) -> String{
     let timeInterver = NSDate().timeIntervalSinceNow
     let time = NSDate(timeIntervalSinceNow: timeInterver)

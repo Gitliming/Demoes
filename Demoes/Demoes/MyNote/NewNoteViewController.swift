@@ -47,7 +47,7 @@ class NewNoteViewController: UIViewController {
         alert(massage: "已添加") { () -> (Void) in
             weakSelf!.navigationController?.popViewControllerAnimated(true)
         }
-        asyn { 
+        asyn_global {
             weakSelf!.writeNoteINSQ(noteModel)
         }
     }

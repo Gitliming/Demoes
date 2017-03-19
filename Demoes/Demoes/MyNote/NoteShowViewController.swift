@@ -52,5 +52,22 @@ class NoteShowViewController: NewNoteViewController {
         noteModel?.desc = desc
         guard let superVC = self.navigationController?.viewControllers[1] as? MyNoteViewController else {return}
         superVC.noteListView.reloadRowsAtIndexPaths([noteIndexPath!], withRowAnimation: .Automatic)
+        weak var weakSelf = self
+        asyn_global {
+            weakSelf!.updateDBData()
+        }
+    }
+    
+    
+    //MARK:--更新数据库数据
+    func updateDBData(){
+        let DB = SQLiteManager.SQManager.DB
+        DB?.open()
+        let noteId = noteModel!.id
+        let sqStr = "UPDATE T_MyNote \n" + "SET id = '\(noteModel!.createTime)', title = '\(noteModel!.title)', desc = '\(noteModel!.desc)', creatTime = '\(noteModel!.createTime)'\n" + "WHERE id is '\(noteId)'"
+        if (DB?.executeUpdate(sqStr, withArgumentsInArray: nil))!{
+            print("更新成功")
+        }
+        DB?.close()
     }
 }
