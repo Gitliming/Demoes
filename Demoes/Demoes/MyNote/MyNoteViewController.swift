@@ -38,10 +38,10 @@ class MyNoteViewController: UIViewController, noteDelegate {
         self.navigationItem.backBarButtonItem = item
         navigationItem.rightBarButtonItem = UIBarButtonItem(title:"编辑", style: .Plain, target: self, action: #selector(MyNoteViewController.editNote))
         noteListView.edite = false
-        bottomButton.title = "＋ 新增笔记"
+        bottomButton.title = "划拉点啥"
         }else{
             navigationItem.rightBarButtonItem?.title = "取消"
-            bottomButton.title = "删除选中"
+            bottomButton.title = "不要这些"
             noteListView.edite = true
         }
     }

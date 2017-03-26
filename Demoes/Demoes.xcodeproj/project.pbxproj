@@ -30,13 +30,13 @@
 		1E43DA5F1DEED661002A3963 /* textXIb.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E43DA4A1DEED661002A3963 /* textXIb.xib */; };
 		1E991E451DEC346800723671 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E991E441DEC346800723671 /* AppDelegate.swift */; };
 		1E991E4A1DEC346800723671 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E991E481DEC346800723671 /* Main.storyboard */; };
-		1E991E4C1DEC346800723671 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E991E4B1DEC346800723671 /* Assets.xcassets */; };
 		1E991E4F1DEC346800723671 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E991E4D1DEC346800723671 /* LaunchScreen.storyboard */; };
 		1EC061701DF014DD00E5AD35 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC0616F1DF014DD00E5AD35 /* BaseViewController.swift */; };
 		1EC061721DF021D300E5AD35 /* UIView + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC061711DF021D300E5AD35 /* UIView + Extention.swift */; };
 		1EE501CD1DEFCA3500F6B308 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EE501CC1DEFCA3500F6B308 /* Images.xcassets */; };
 		AFD5CD2B7A3CDF7172C871AA /* Pods_Demoes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4535766391C58BF246C5A1 /* Pods_Demoes.framework */; };
 		DA05F9AF1E75310C0016ED11 /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05F9AE1E75310C0016ED11 /* SQLiteManager.swift */; };
+		DA3DD4C21E87D2C7002DB0EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA3DD4C11E87D2C7002DB0EF /* Assets.xcassets */; };
 		DA5042CB1E60772500D87993 /* AppStatusOberver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5042CA1E60772500D87993 /* AppStatusOberver.swift */; };
 		DAAB74741E6AD3A9009B3524 /* MyNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB746E1E6AD3A9009B3524 /* MyNoteCell.swift */; };
 		DAAB74751E6AD3A9009B3524 /* MyNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAAB746F1E6AD3A9009B3524 /* MyNoteCell.xib */; };
@@ -93,7 +93,6 @@
 		1E991E411DEC346800723671 /* Demoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E991E441DEC346800723671 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E991E491DEC346800723671 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1E991E4B1DEC346800723671 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1E991E4E1DEC346800723671 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1E991E501DEC346800723671 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E991E551DEC346800723671 /* DemoesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +104,7 @@
 		6991A355B3C938EC19282BC8 /* Pods-Demoes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demoes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demoes/Pods-Demoes.debug.xcconfig"; sourceTree = "<group>"; };
 		6C56637747661226C0BFEF90 /* Pods-Demoes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demoes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demoes/Pods-Demoes.release.xcconfig"; sourceTree = "<group>"; };
 		DA05F9AE1E75310C0016ED11 /* SQLiteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
+		DA3DD4C11E87D2C7002DB0EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA5042CA1E60772500D87993 /* AppStatusOberver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStatusOberver.swift; sourceTree = "<group>"; };
 		DAAB746E1E6AD3A9009B3524 /* MyNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNoteCell.swift; sourceTree = "<group>"; };
 		DAAB746F1E6AD3A9009B3524 /* MyNoteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyNoteCell.xib; sourceTree = "<group>"; };
@@ -267,9 +267,9 @@
 				DAAB746D1E6AD27E009B3524 /* MyNote */,
 				1E991E441DEC346800723671 /* AppDelegate.swift */,
 				1E991E481DEC346800723671 /* Main.storyboard */,
-				1E991E4B1DEC346800723671 /* Assets.xcassets */,
 				1E991E4D1DEC346800723671 /* LaunchScreen.storyboard */,
 				1E991E501DEC346800723671 /* Info.plist */,
+				DA3DD4C11E87D2C7002DB0EF /* Assets.xcassets */,
 				1EE501CC1DEFCA3500F6B308 /* Images.xcassets */,
 			);
 			path = Demoes;
@@ -445,7 +445,7 @@
 				1E43DA571DEED661002A3963 /* qrcode_found.wav in Resources */,
 				1EE501CD1DEFCA3500F6B308 /* Images.xcassets in Resources */,
 				DAAB74751E6AD3A9009B3524 /* MyNoteCell.xib in Resources */,
-				1E991E4C1DEC346800723671 /* Assets.xcassets in Resources */,
+				DA3DD4C21E87D2C7002DB0EF /* Assets.xcassets in Resources */,
 				1E43DA5C1DEED661002A3963 /* shareViewController.xib in Resources */,
 				1E43DA5F1DEED661002A3963 /* textXIb.xib in Resources */,
 				DAAB74781E6AD3A9009B3524 /* MyNoteViewController.xib in Resources */,

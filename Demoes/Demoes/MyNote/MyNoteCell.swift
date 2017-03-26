@@ -19,6 +19,7 @@ class MyNoteCell: UITableViewCell {
     @IBOutlet weak var titleLeading: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = UIColor.clearColor()
     }
     
     var isSelectedStatus: Bool = false{

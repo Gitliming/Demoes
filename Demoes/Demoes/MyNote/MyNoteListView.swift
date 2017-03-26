@@ -42,6 +42,12 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        //设置背景图片并珊格化界面
+        layer.contents = UIImage(named: "flower")?.CGImage
+        layer.shouldRasterize = true
+        layer.rasterizationScale = screenScare
+        layer.drawsAsynchronously = true
+        
         registerNib(UINib(nibName:notecell, bundle: nil), forCellReuseIdentifier: notecell)
         tableFooterView = UIView.spliteLine(15)
         rowHeight = 60
@@ -214,7 +220,7 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
         }
     }
     
-    
+/*
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if scrollView.contentSize.height > scrollView.frame.size.height{
         if scrollView.contentOffset.y + scrollView.frame.size.height >= scrollView.contentSize.height + 60{
@@ -226,4 +232,5 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
             }
         }
     }
+ */
 }

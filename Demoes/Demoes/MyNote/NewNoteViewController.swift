@@ -26,6 +26,7 @@ class NewNoteViewController: UIViewController {
     
     func setTitle(){
         title = "新增笔记"
+        noteView.layer.contents = UIImage(named: "wall")?.CGImage
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完成", style: .Plain, target: self, action: #selector(NewNoteViewController.addNote))
         Notifications.beginInputNote.addObserve(self, object: nil, selecter: #selector(NewNoteViewController.beginInput))
     }

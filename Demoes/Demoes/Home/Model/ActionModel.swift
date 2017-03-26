@@ -13,7 +13,7 @@ class ActionModel: NSObject {
                                       "自定义转场":"DetailViewController",
                                       "二维码部落":"InputController",
                                       "通讯录":"AddressController",
-                                      "我的笔记":"MyNoteViewController"]
+                                      "江南笔记":"MyNoteViewController"]
     var modelArray = [Model]()
     override init() {
         super.init()
