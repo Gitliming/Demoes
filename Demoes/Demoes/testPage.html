@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>javaScript与OC 的交互</title>
+    <style>
+        div,video,button,video,h1,img{
+            margin: auto;
+            width: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div style="background-color: beige">
+    <h1 style="color: chartreuse;text-align: center">javaScript与OC的交互</h1>
+<video height="100%" controls = "controls" >
+    <source src="HuangHun.mp4"  type="video/mp4">
+</video>
+    <br>
+    <img id="icon" src="hose.jpg" alt="野马">
+<br>
+    <button type="button"  onclick="webOwner.openCamare()" style="border-color: red" >启动相机</button>
+</div>
+<script>
+   var callBack = function openCamare(photoes) {
+       document.getElementById("icon").setAttribute(["src"],[photoes])
+<!--        alert("bc")-->
+    }
+</script>
+</body>
+</html>

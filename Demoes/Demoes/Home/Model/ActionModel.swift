@@ -13,15 +13,21 @@ class ActionModel: NSObject {
                                       "自定义转场":"DetailViewController",
                                       "二维码部落":"InputController",
                                       "通讯录":"AddressController",
-                                      "江南笔记":"MyNoteViewController"]
+                                      "江南笔记":"MyNoteViewController",
+                                      "OC与JS交互":"WebViewController"]
     var modelArray = [Model]()
     override init() {
         super.init()
         if ActionList.count == 0 {return}
         for (k, v) in ActionList {
+            var vc:AnyClass?
+            if k == "OC与JS交互"{
+                 vc = NSClassFromString("WebViewController")
+            }else{
+                 vc = UIViewController.swiftClassFromString(v)
+            }
             
             let mod = Model()
-            let vc:AnyClass? = UIViewController.swiftClassFromString(v)
             if vc == nil {continue}
             mod.ActionName = k
             mod.ActionVc = vc
