@@ -16,7 +16,6 @@ class NewNoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTitle()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,11 +43,12 @@ class NewNoteViewController: UIViewController {
         let noteModel = MyNote(id: timeString, title: cutOutTitle(noteView.text), desc: noteView.text, createTime: timeString)
         guard let _ = delegate else{return}
         delegate?.addNewNote(noteModel)
+        weak var weakSelf = self
         alert(massage: "已添加") { () -> (Void) in
-           weakSelf(self)!.navigationController??.popViewControllerAnimated(true)
+           weakSelf!.navigationController?.popViewControllerAnimated(true)
         }
         asyn_global {
-            weakSelf(self)!.writeNoteINSQ(noteModel)
+            weakSelf!.writeNoteINSQ(noteModel)
         }
     }
     

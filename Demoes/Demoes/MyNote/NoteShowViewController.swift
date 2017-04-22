@@ -52,8 +52,9 @@ class NoteShowViewController: NewNoteViewController {
         noteModel?.desc = desc
         guard let superVC = self.navigationController?.viewControllers[1] as? MyNoteViewController else {return}
         superVC.noteListView.reloadRowsAtIndexPaths([noteIndexPath!], withRowAnimation: .Automatic)
+        weak var weakSelf = self
         asyn_global {
-            weakSelf(self)!.updateDBData()
+            weakSelf!.updateDBData()
         }
     }
     

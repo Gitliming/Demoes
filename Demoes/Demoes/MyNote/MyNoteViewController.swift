@@ -101,8 +101,9 @@ class MyNoteViewController: UIViewController, noteDelegate {
             }
         }
         noteListView.reloadData()
-        asyn_global { 
-           weakSelf(self)!.deleteDatasInDB(deIds)
+        weak var weakSelf = self
+        asyn_global {
+           weakSelf!.deleteDatasInDB(deIds)
         }
     }
     
