@@ -26,10 +26,7 @@
 @end
 
 @implementation WebViewController
-//-(void)loadView{
-//    self.view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 375, 667)];
-//    NSLog(@"%s",__FUNCTION__);
-//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.webView = [[MywebView alloc]initWithFrame:self.view.bounds];
@@ -79,17 +76,19 @@
         [pickerVc setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         pickerVc.allowsEditing = YES;
         pickerVc.delegate = self;
-        [self presentViewController:pickerVc animated:true completion:nil];
-
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController:pickerVc animated:true completion:nil];
+        });
+        
     }else{
+        
         UIAlertController * alertVc = [[UIAlertController alloc]init];
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"请打开相机权限" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
         }];
         [alertVc addAction:action];
-        
-        [self presentViewController:alertVc animated:true completion:nil];
-
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController:alertVc animated:true completion:nil];
+        });
     }
 }
 
@@ -123,7 +122,10 @@
 
 -(void)cleanCache{
     if (self.deletePath) {
-        [[NSFileManager defaultManager]removeItemAtPath:self.deletePath error:nil];
+       __weak typeof(self) weakself = self;
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            [[NSFileManager defaultManager]removeItemAtPath:weakself.deletePath error:nil];
+        });
     }
 }
 
@@ -139,6 +141,4 @@
     }
     return outputStr;
 }
-
-
 @end
