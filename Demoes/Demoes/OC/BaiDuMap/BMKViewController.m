@@ -20,8 +20,7 @@
 
 @interface BMKViewController ()<BMKMapViewDelegate,
                                 BMKLocationServiceDelegate,
-                                UISearchBarDelegate,
-                                BMKMapViewDelegate>
+                                UISearchBarDelegate>
 
 @property(nonatomic,strong)BMKMapView * mapView;
 @property(nonatomic,strong)BMKLocationService * locationService;
@@ -134,7 +133,7 @@
 -(BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id<BMKAnnotation>)annotation{
     if ([annotation isKindOfClass:[BMKAnnotion class]]) {
         BMKPinAnnotationView * annotationView = [[BMKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"xianghu"];
-        annotationView.pinColor = BMKPinAnnotationColorGreen;
+        annotationView.pinColor = BMKPinAnnotationColorPurple;
         annotationView.animatesDrop = YES;
         return annotationView;
     }

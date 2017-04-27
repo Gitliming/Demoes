@@ -32,6 +32,7 @@ class MyNoteViewController: UIViewController, noteDelegate {
     }
     
     func setupUI(){
+        view.frame = screenBounds
         if noteListView.edite == false{
         title = "我的笔记"
         let item = UIBarButtonItem(title: "返回", style: .Plain, target: self, action: nil)
