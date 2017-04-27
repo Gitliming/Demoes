@@ -14,15 +14,16 @@ class ActionModel: NSObject {
                                       "二维码部落":"InputController",
                                       "通讯录":"AddressController",
                                       "江南笔记":"MyNoteViewController",
-                                      "OC与JS交互":"WebViewController"]
+                                      "OC与JS交互":"WebViewController",
+                                      "地图导航":"BMKViewController"]
     var modelArray = [Model]()
     override init() {
         super.init()
         if ActionList.count == 0 {return}
         for (k, v) in ActionList {
             var vc:AnyClass?
-            if k == "OC与JS交互"{
-                 vc = NSClassFromString("WebViewController")
+            if k == "OC与JS交互" || k == "地图导航"{
+                 vc = NSClassFromString(v)
             }else{
                  vc = UIViewController.swiftClassFromString(v)
             }

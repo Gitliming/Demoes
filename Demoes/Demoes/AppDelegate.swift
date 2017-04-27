@@ -15,13 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK:-- kvo测试app状态
    dynamic var appStatus:String?
     var appObserver:AppStatusOberver?
+    
+    var mapMannager:BMKMapManager?
 
     func applicationDidFinishLaunching(application: UIApplication) {
-                appObserver = AppStatusOberver()
+        appObserver = AppStatusOberver()
         self.addObserver(appObserver!, forKeyPath: "appStatus", options: .New, context: nil)
+        setMapMannager()
         appStatus = "launch---------"
-        // 开启数据库
-       // SQLiteManager.SQManager.openDB("Demoes_MyNote.sqlite")
+        
     }
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -50,6 +52,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appStatus = "WillTerminate"
     }
 
-
+    func setMapMannager(){
+    mapMannager = BMKMapManager()
+        let ret = mapMannager?.start("7v8PT4mrQB6vNiKtFUGsGZ7nVycEd0XV", generalDelegate: nil)
+        if (ret == false) {
+        print("****百度地图加载失败****")
+        }
+    }
 }
 

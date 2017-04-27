@@ -73,11 +73,11 @@ class MyNoteListView: UITableView,/*,MJTableViewRefreshDelegate,*/ UITableViewDa
             reloadData()
         }
         DB?.close()
-        var begin = 0
+//        var begin = 0
         if isfresh{
-            begin = 0
+//            begin = 0
         }else{
-            begin = self.notes.count
+//            begin = self.notes.count
         }
         
             self.finishedRefresh()

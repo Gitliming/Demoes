@@ -83,7 +83,6 @@ class NewNoteViewController: UIViewController {
     }
     
     
-    
     deinit{
         Notifications.beginInputNote.removeObserver(self, sender: nil)
     }

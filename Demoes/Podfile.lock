@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (3.5.1)
+  - BaiduMapKit (3.0.0)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
@@ -27,6 +28,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (= 3.5.1)
+  - BaiduMapKit (~> 3.0.0)
   - FMDB (~> 2.6.2)
   - MJRefresh (~> 3.1.12)
   - RongCloudIM (~> 2.8.2)
@@ -34,11 +36,12 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
+  BaiduMapKit: de2a726d5296d6b2dc0e974b683af73153608dcd
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   RongCloudIM: c38f0afbcb417e735afafbb011ba53c9dd5a9cf2
   UMeng: a4fe3231efeb223015d9649e92538dd16a92685f
 
-PODFILE CHECKSUM: 8205d379f73c53cb31c74d3177153f21da1bc19e
+PODFILE CHECKSUM: 20d85cd9845daaf6eee3d02a173df47ab0216ff6
 
 COCOAPODS: 1.2.0.rc.1
