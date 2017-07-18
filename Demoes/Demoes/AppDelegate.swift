@@ -19,6 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var mapMannager:BMKMapManager?
 
     func applicationDidFinishLaunching(application: UIApplication) {
+        window = UIWindow(frame: screenBounds)
+        
+        let rootVc = RootTabBarController()
+        
+        window?.rootViewController = rootVc
+        
+        window?.makeKeyAndVisible()
+        
         appObserver = AppStatusOberver()
         self.addObserver(appObserver!, forKeyPath: "appStatus", options: .New, context: nil)
         setMapMannager()
