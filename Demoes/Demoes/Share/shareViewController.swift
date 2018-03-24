@@ -22,26 +22,26 @@ class shareViewController: BaseViewController {
     }
     
     func setUI() {
-        view.frame = UIScreen.mainScreen().bounds
+        view.frame = UIScreen.main.bounds
         view.layoutIfNeeded()
-        shareContentView.layer.contents = UIImage(named: "share_bg")?.CGImage
+        shareContentView.layer.contents = UIImage(named: "share_bg")?.cgImage
         firstY = shareContentView.frame.origin.y
         shareContentView.frame.origin.y = view.frame.maxY
-        animating(self.parentViewController!)
+        animating(self.parent!)
         bindShareAction()
     }
-    @IBAction func viewTap(sender: AnyObject) {
-        animating(self.parentViewController!)
+    @IBAction func viewTap(_ sender: AnyObject) {
+        animating(self.parent!)
     }
-   func animating(parentCtrl:UIViewController) {
+   func animating(_ parentCtrl:UIViewController) {
         if shareContentView.frame.maxY == view.frame.maxY{
-            UIView.animateWithDuration(0.3, animations: {
+            UIView.animate(withDuration: 0.3, animations: {
                 self.shareContentView.frame.origin.y = self.view.frame.maxY
                 }, completion: { (true) in
                     UIViewController.unshowViewController(parentCtrl, VC: self)
             })
         }else{
-        UIView.animateWithDuration(0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.shareContentView.frame.origin.y = self.firstY!
             })
         }
@@ -51,13 +51,13 @@ class shareViewController: BaseViewController {
         let contentViews = shareContentView.subviews
         for v in contentViews {
             for btn in v.subviews{
-                if btn.isKindOfClass(UIButton){
-                (btn as! UIButton).addTarget(self, action: #selector(shareViewController.shareAction(_:)), forControlEvents: .TouchUpInside)
+                if btn.isKind(of: UIButton.self){
+                (btn as! UIButton).addTarget(self, action: #selector(shareViewController.shareAction(_:)), for: .touchUpInside)
                 }
             }
         }
     }
-    func shareAction (button:UIButton){
+    func shareAction (_ button:UIButton){
         switch button.tag {
         case 0://QQ
             print(button.tag)

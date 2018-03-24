@@ -24,20 +24,20 @@ class MyNoteViewController: UIViewController, noteDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
 //        noteListView.refreshData()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
     }
     
     func setupUI(){
         view.frame = screenBounds
         if noteListView.edite == false{
         title = "我的笔记"
-        let item = UIBarButtonItem(title: "返回", style: .Plain, target: self, action: nil)
+        let item = UIBarButtonItem(title: "返回", style: .plain, target: self, action: nil)
         self.navigationItem.backBarButtonItem = item
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title:"编辑", style: .Plain, target: self, action: #selector(MyNoteViewController.editNote))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title:"编辑", style: .plain, target: self, action: #selector(MyNoteViewController.editNote))
         noteListView.edite = false
         bottomButton.title = "划拉点啥"
         }else{
@@ -47,15 +47,15 @@ class MyNoteViewController: UIViewController, noteDelegate {
         }
     }
     //  MARK:--  noteDelegate
-    func addNewNote(note: MyNote) {
+    func addNewNote(_ note: MyNote) {
         noteListView.notes.append(note)
         noteListView.reloadData()
     }
 
     //清理标记
-    private  func clearSelected(){
+    fileprivate  func clearSelected(){
         for cell in noteListView.visibleCells{
-            (cell as!MyNoteCell).selectedMark.hidden = true
+            (cell as!MyNoteCell).selectedMark.isHidden = true
         }
     }
     //编辑笔记
@@ -74,7 +74,7 @@ class MyNoteViewController: UIViewController, noteDelegate {
         }
     }
     //新增笔记/删除笔记
-    @IBAction func newNote(sender: AnyObject) {
+    @IBAction func newNote(_ sender: AnyObject) {
         if noteListView.edite == false{
         let vc = NewNoteViewController(nibName: "NewNoteViewController", bundle: nil)
             vc.delegate = self
@@ -91,12 +91,12 @@ class MyNoteViewController: UIViewController, noteDelegate {
         }
     }
     //删除服务器数据
-    func deleteNoteFromService(ids:[MyNote]?){
+    func deleteNoteFromService(_ ids:[MyNote]?){
         var deIds:[String] = [String]()
         for delNote in ids!{
-            for (index,note) in noteListView.notes.enumerate(){
+            for (index,note) in noteListView.notes.enumerated(){
                 if delNote.id == note.id{
-                    noteListView.notes.removeAtIndex(index)
+                    noteListView.notes.remove(at: index)
                     deIds.append(delNote.id)
                 }
             }
@@ -109,7 +109,7 @@ class MyNoteViewController: UIViewController, noteDelegate {
     }
     
     
-    func deleteDatasInDB(ids:[String]) {
+    func deleteDatasInDB(_ ids:[String]) {
         let DB = SQLiteManager.SQManager.DB
         DB?.open()
         
@@ -117,7 +117,7 @@ class MyNoteViewController: UIViewController, noteDelegate {
             
             let sqStr = "DELETE FROM T_MyNote WHERE id is '\(id)';"
             
-            if (DB?.executeUpdate(sqStr, withArgumentsInArray: nil))! {
+            if (DB?.executeUpdate(sqStr, withArgumentsIn: nil))! {
 //                print("批量删除成功")
                 }
             }

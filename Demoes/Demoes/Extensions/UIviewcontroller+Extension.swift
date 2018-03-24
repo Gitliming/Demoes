@@ -10,23 +10,23 @@ import Foundation
 import UIKit
 extension UIViewController{
     //MARK:-- 添加子控制器
-    class func showViewController(parentVC:UIViewController, VC:UIViewController){
+    class func showViewController(_ parentVC:UIViewController, VC:UIViewController){
         if parentVC.childViewControllers.count < 1 {
         parentVC.addChildViewController(VC)
         parentVC.view.addSubview(VC.view)
         }
     }
     //MARK:-- 移除子控制器
-    class func unshowViewController(parentVC:UIViewController, VC:UIViewController){
+    class func unshowViewController(_ parentVC:UIViewController, VC:UIViewController){
         if parentVC.childViewControllers.count > 0 {
             VC.removeFromParentViewController()
             VC.view.removeFromSuperview()
         }
     }
     //MARK:--根据类名转换类
-    class func swiftClassFromString(className: String) -> AnyClass! {
+    class func swiftClassFromString(_ className: String) -> AnyClass! {
         // get the project name
-        if  let appName: String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as! String? {
+        if  let appName: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String? {
             //            let indexStart = appName.startIndex.advancedBy(10)
             //            let indexEnd = appName.endIndex.advancedBy(-6)
             //            let subStr = appName.substringToIndex(indexStart)
@@ -41,7 +41,7 @@ extension UIViewController{
     }
     //MARK:-- 获取最上层控制器
     class func topViewController() -> UIViewController{
-    let rootVc = UIApplication.sharedApplication().keyWindow?.rootViewController?.childViewControllers.first
+    let rootVc = UIApplication.shared.keyWindow?.rootViewController?.childViewControllers.first
         return rootVc!
     }
 }

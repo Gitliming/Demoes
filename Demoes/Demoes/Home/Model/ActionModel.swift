@@ -35,9 +35,9 @@ class ActionModel: NSObject {
             modelArray.append(mod)
         }
     }
-    func swiftClassFromString(className: String) -> AnyClass! {
+    func swiftClassFromString(_ className: String) -> AnyClass! {
         // get the project name
-        if  let appName: String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as! String? {
+        if  let appName: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String? {
         //  如果appName中有空格，会用“——”代替
             let classStringName = "\(appName).\(className)"
         // return the class!

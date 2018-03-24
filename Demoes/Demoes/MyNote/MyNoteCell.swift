@@ -19,7 +19,7 @@ class MyNoteCell: UITableViewCell {
     @IBOutlet weak var titleLeading: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
     }
     
     var isSelectedStatus: Bool = false{
@@ -37,7 +37,7 @@ class MyNoteCell: UITableViewCell {
     
     var isEditingStatus: Bool = false{
         didSet{
-            selectedMark.hidden = !isEditingStatus
+            selectedMark.isHidden = !isEditingStatus
             selectedMark.image = UIImage(named: "icon_unselect")
             
             if isEditingStatus {

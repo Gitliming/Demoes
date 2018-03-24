@@ -9,36 +9,36 @@
 import Foundation
 
 struct Notifications {
-    static let notificationCenter = NSNotificationCenter.defaultCenter()
+    static let notificationCenter = NotificationCenter.default
 //    通知注册处：
     static var beginInputNote = delegate(name: "UITextViewTextDidBeginEditingNotification")
     
     class delegate {
-        private let name:String
+        fileprivate let name:String
         
         init(name:String) {
             self.name = name
         }
         
 //        MARK:-- post notification
-        func post(object:AnyObject?){
+        func post(_ object:AnyObject?){
             asyn {
-                notificationCenter.postNotificationName(self.name, object: object)
+                notificationCenter.post(name: Notification.Name(rawValue: self.name), object: object)
             }
         }
         
 //        MARK:-- add observer
-        func addObserve(observer:AnyObject, object:AnyObject?, selecter:Selector) {
-            notificationCenter.addObserver(observer, selector: selecter, name: name, object:object )
+        func addObserve(_ observer:AnyObject, object:AnyObject?, selecter:Selector) {
+            notificationCenter.addObserver(observer, selector: selecter, name: NSNotification.Name(rawValue: name), object:object )
         }
         
 //        MARK:remove observer
-        func removeObserver(observer:AnyObject, sender object:AnyObject?){
-            notificationCenter.removeObserver(observer, name: name, object: observer)
+        func removeObserver(_ observer:AnyObject, sender object:AnyObject?){
+            notificationCenter.removeObserver(observer, name: NSNotification.Name(rawValue: name), object: observer)
         }
         
 //        MARK:-- remove All Observer
-        func removeAllObserver(observer:AnyObject) {
+        func removeAllObserver(_ observer:AnyObject) {
             notificationCenter.removeObserver(observer)
         }
     }

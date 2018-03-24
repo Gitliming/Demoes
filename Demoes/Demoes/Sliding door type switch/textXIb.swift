@@ -30,11 +30,11 @@ class textXIb: UIView {
     
     func loadViewFromeNib() {
         
-        let bondle = NSBundle(forClass: self.dynamicType)
+        let bondle = Bundle(for: type(of: self))
         
         let nib = UINib(nibName: "textXIb", bundle: bondle)
         
-        let vie = nib.instantiateWithOwner(self, options: nil).first as! UIView
+        let vie = nib.instantiate(withOwner: self, options: nil).first as! UIView
         vie.frame = self.bounds
         self.addSubview(vie)
 

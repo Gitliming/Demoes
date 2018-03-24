@@ -19,7 +19,7 @@ class SQLiteManager: NSObject {
         openDB("Demoes_MyNote.sqlite")
     }
 //    打开数据库
-    func openDB(name:String?){
+    func openDB(_ name:String?){
         let path = getCachePath(name!)
         print(path)
         DB = FMDatabase(path: path)
@@ -46,12 +46,12 @@ class SQLiteManager: NSObject {
             "creatTime TEXT \n" +
         ");"
         //执行语句
-        return DB!.executeUpdate(sqlit1, withArgumentsInArray: nil)
+        return DB!.executeUpdate(sqlit1, withArgumentsIn: nil)
     }
     //MARK:-- 拼接路径
-    func getCachePath(fileName:String) -> String{
-        let path1 = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory
-            , NSSearchPathDomainMask.UserDomainMask, true).first
+    func getCachePath(_ fileName:String) -> String{
+        let path1 = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory
+            , FileManager.SearchPathDomainMask.userDomainMask, true).first
         let path2 = path1! + "/" + fileName
         return path2
     }

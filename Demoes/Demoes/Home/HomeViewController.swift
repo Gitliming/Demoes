@@ -23,31 +23,31 @@ class HomeViewController: BaseViewController {
     func setUpUI(){
         
         ///首页
-        tableView = HomeView(frame: CGRectMake(0, 0, view.bounds.width, view.bounds.height), style: .Plain)
-        tableView!.layer.contents = UIImage(named: "bg")?.CGImage
+        tableView = HomeView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), style: .plain)
+        tableView!.layer.contents = UIImage(named: "bg")?.cgImage
         view.addSubview(tableView!)
-        navigationController?.navigationBar.setBackgroundImage(UIImage(named: "k"), forBarMetrics: UIBarMetrics.Default)
-        navigationController?.navigationBar.tintColor = UIColor.orangeColor()
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.purpleColor()]
+        navigationController?.navigationBar.setBackgroundImage(UIImage(named: "k"), for: UIBarMetrics.default)
+        navigationController?.navigationBar.tintColor = UIColor.orange
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.purple]
     }
     
 //裁剪图片
-    func clipeImage(imageName:String?, imgWidth:CGFloat, imgHeight:CGFloat){
+    func clipeImage(_ imageName:String?, imgWidth:CGFloat, imgHeight:CGFloat){
         
         guard let imgName = imageName else {return}
         var image = UIImage(named: imgName)
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(imgWidth+2, imgHeight+2), false, UIScreen.mainScreen().scale)
-        let patch = UIBezierPath(arcCenter: CGPoint(x: (imgWidth / 2)+0.5,y: (imgHeight / 2)+0.5 ), radius: imgHeight / 2, startAngle: 0, endAngle:CGFloat(M_PI * 2) , clockwise: true)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: imgWidth+2, height: imgHeight+2), false, UIScreen.main.scale)
+        let patch = UIBezierPath(arcCenter: CGPoint(x: (imgWidth / 2)+0.5,y: (imgHeight / 2)+0.5 ), radius: imgHeight / 2, startAngle: 0, endAngle:CGFloat(Double.pi * 2) , clockwise: true)
         patch.lineWidth = 1.0
-        UIColor.clearColor().setFill()
+        UIColor.clear.setFill()
         patch.stroke()
         patch.addClip()
-        image?.drawInRect(CGRectMake(0, 0, imgWidth, imgHeight))
+        image?.draw(in: CGRect(x: 0, y: 0, width: imgWidth, height: imgHeight))
         image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-        let filePath = paths[0].stringByAppendingString("\(imageName).png")
-        UIImagePNGRepresentation(image!)?.writeToFile(filePath, atomically: true)
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        let filePath = paths[0] + "\(String(describing: imageName)).png"
+        try? UIImagePNGRepresentation(image!)?.write(to: URL(fileURLWithPath: filePath), options: [.atomic])
         
         print(NSHomeDirectory())
     }

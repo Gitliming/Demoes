@@ -17,21 +17,21 @@ class NCViewController: BaseViewController, UIGestureRecognizerDelegate {
     var startPan:CGPoint?
     var index = 0
     var previousView:UIView?
-    let rect = UIScreen.mainScreen().bounds
-    let width = UIScreen.mainScreen().bounds.width
-    let preRect = CGRect(x: -UIScreen.mainScreen().bounds.width, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+    let rect = UIScreen.main.bounds
+    let width = UIScreen.main.bounds.width
+    let preRect = CGRect(x: -UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         name = "zhangsan"
-        view!.layer.contents = UIImage(named: "f")?.CGImage
+        view!.layer.contents = UIImage(named: "f")?.cgImage
         setUp()
         
     }
     func setUp () {
         let button = UIButton()
-        button.addTarget(self, action: #selector(NCViewController.share), forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(NCViewController.share), for: .touchUpInside)
         navigationItem.setRightButton(bgImgName: "share_btn", button:button)
 //    let vs = NSBundle.mainBundle().loadNibNamed("textXIb", owner: nil, options: nil)
 //        
@@ -64,52 +64,52 @@ class NCViewController: BaseViewController, UIGestureRecognizerDelegate {
         let imageView1 = UIImageView(frame: rect)
         imageView1.image = UIImage(named: "e")
         view1.addSubview(imageView1)
-        view1.backgroundColor = UIColor.lightGrayColor()
+        view1.backgroundColor = UIColor.lightGray
         let view2 = UIView(frame: rect)
-        view2.backgroundColor = UIColor.brownColor()
+        view2.backgroundColor = UIColor.brown
         let imageView2 = UIImageView(frame: rect)
         imageView2.image = UIImage(named: "d")
         
         view2.addSubview(imageView2)
         let view3 = UIView(frame: rect)
-        view3.backgroundColor = UIColor.yellowColor()
+        view3.backgroundColor = UIColor.yellow
         let imageView3 = UIImageView(frame: rect)
         imageView3.image = UIImage(named: "c")
         
         view3.addSubview(imageView3)
-        view.insertSubview(view1, atIndex: 0)
-        view.insertSubview(view2, atIndex: 1)
-        view.insertSubview(view3, atIndex: 2)
-        view.insertSubview(xib!, atIndex: 3)
+        view.insertSubview(view1, at: 0)
+        view.insertSubview(view2, at: 1)
+        view.insertSubview(view3, at: 2)
+        view.insertSubview(xib!, at: 3)
         index = view.subviews.count - 1
 
     }
 //    手势实现切换逻辑
-    func panAction(panGestu:UIPanGestureRecognizer){
+    func panAction(_ panGestu:UIPanGestureRecognizer){
 
-        let point = panGestu.locationInView(view)
+        let point = panGestu.location(in: view)
         let move = point.x - (startPan?.x)!
         let panMove = move / width
         let targetView = view.subviews[index]
         if panMove > 0 {
             if index < 3{
             previousView = view.subviews[index + 1]
-            previousView!.frame = CGRectOffset(preRect, move, 0)
+            previousView!.frame = preRect.offsetBy(dx: move, dy: 0)
             }
         }else{
-        targetView.frame = CGRectOffset(rect, move, 0)
+        targetView.frame = rect.offsetBy(dx: move, dy: 0)
         }
-        if panGestu.state == UIGestureRecognizerState.Ended {
+        if panGestu.state == UIGestureRecognizerState.ended {
             if panMove < -0.5 {
                 if index == 0{
-                    UIView.animateWithDuration(0.5, animations: {
+                    UIView.animate(withDuration: 0.5, animations: {
                         targetView.frame = self.rect
                     })
 
                 }else{
-                    UIView.animateWithDuration(0.5, animations: {
+                    UIView.animate(withDuration: 0.5, animations: {
                         
-                        targetView.frame = CGRectOffset(self.rect, -self.width, 0)
+                        targetView.frame = self.rect.offsetBy(dx: -self.width, dy: 0)
                     })
 
                 }
@@ -117,24 +117,24 @@ class NCViewController: BaseViewController, UIGestureRecognizerDelegate {
                     index -= 1
                 }
             }else if panMove < 0 && panMove >= -0.5 {
-                UIView.animateWithDuration(0.5, animations: {
+                UIView.animate(withDuration: 0.5, animations: {
                     targetView.frame = self.rect
                 })
                 
                 
             }else if panMove < 0.5 && panMove >= 0 {
                 guard let pre = previousView else {
-                    UIView.animateWithDuration(0.5, animations: {
+                    UIView.animate(withDuration: 0.5, animations: {
                         targetView.frame = self.rect
                     })
 
                     return
                 }
-                UIView.animateWithDuration(0.5, animations: {
+                UIView.animate(withDuration: 0.5, animations: {
                      pre.frame = self.preRect
                 })
                 if index == view.subviews.count - 1 {
-                    UIView.animateWithDuration(0.5, animations: {
+                    UIView.animate(withDuration: 0.5, animations: {
                         targetView.frame = self.rect
                     })
                 }
@@ -142,19 +142,19 @@ class NCViewController: BaseViewController, UIGestureRecognizerDelegate {
                 if index == view.subviews.count - 1 {
                     guard let pre = previousView else {
                         
-                    UIView.animateWithDuration(0.5, animations: {
+                    UIView.animate(withDuration: 0.5, animations: {
                             targetView.frame = self.rect
                         })
                         return
                     }
-                    UIView.animateWithDuration(0.5, animations: {
+                    UIView.animate(withDuration: 0.5, animations: {
                         pre.frame = self.preRect
                         targetView.frame = self.rect
                     })
 
                 }else {
                     guard let pre = previousView else {return}
-                    UIView.animateWithDuration(0.5, animations: {
+                    UIView.animate(withDuration: 0.5, animations: {
                         pre.frame = self.rect
                     })
                 }
@@ -167,8 +167,8 @@ class NCViewController: BaseViewController, UIGestureRecognizerDelegate {
         
     }
     
-    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        startPan = gestureRecognizer.locationInView(view)
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        startPan = gestureRecognizer.location(in: view)
         return true
     }
     

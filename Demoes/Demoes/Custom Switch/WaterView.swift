@@ -7,6 +7,30 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
 
 class WaterView: UIView, UIGestureRecognizerDelegate {
     var displayLink:CADisplayLink?
@@ -17,13 +41,13 @@ class WaterView: UIView, UIGestureRecognizerDelegate {
     var topTitleView:UIView?
     var leftTitleView:UIView?
     var listView:UIView?
-    var topCtrlPoint:CGPoint = CGPointZero
-    var leftCtrlPoint:CGPoint = CGPointZero
+    var topCtrlPoint:CGPoint = CGPoint.zero
+    var leftCtrlPoint:CGPoint = CGPoint.zero
     var persentPan:CGFloat?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.white
         addPanGesture()
         creatSubViews()
     }
@@ -33,15 +57,15 @@ class WaterView: UIView, UIGestureRecognizerDelegate {
     }
     
     func creatSubViews(){
-        topTitleView = UIView(frame: CGRectMake(self.bounds.width / 2,0,5,5))
-        topTitleView?.backgroundColor = UIColor.clearColor()
-        leftTitleView = UIView(frame: CGRectMake(0,self.bounds.height / 2,5,5))
-        leftTitleView?.backgroundColor = UIColor.clearColor()
+        topTitleView = UIView(frame: CGRect(x: self.bounds.width / 2,y: 0,width: 5,height: 5))
+        topTitleView?.backgroundColor = UIColor.clear
+        leftTitleView = UIView(frame: CGRect(x: 0,y: self.bounds.height / 2,width: 5,height: 5))
+        leftTitleView?.backgroundColor = UIColor.clear
         shapLayerTop = CAShapeLayer()
         shapLayerLeft = CAShapeLayer()
-        self.layer.contents = UIImage(named: "20131018110819_LZhKK")?.CGImage
-        shapLayerTop?.fillColor = UIColor.greenColor().CGColor
-        shapLayerLeft?.fillColor = UIColor.greenColor().CGColor
+        self.layer.contents = UIImage(named: "20131018110819_LZhKK")?.cgImage
+        shapLayerTop?.fillColor = UIColor.green.cgColor
+        shapLayerLeft?.fillColor = UIColor.green.cgColor
         self.layer.addSublayer(shapLayerTop!)
         self.layer.addSublayer(shapLayerLeft!)
         self.addSubview(topTitleView!)
@@ -51,48 +75,48 @@ class WaterView: UIView, UIGestureRecognizerDelegate {
     func addPanGesture(){
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(WaterView.PanAction(_:)))
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         self.addGestureRecognizer(pan)
         
         displayLink = CADisplayLink(target: self, selector: #selector(WaterView.caculatePath))
-        displayLink?.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
-        displayLink?.paused = true
+        displayLink?.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
+        displayLink?.isPaused = true
     }
     
-    func PanAction(panGesture:UIPanGestureRecognizer){
-      let point = panGesture.translationInView(self)
-        topTitleView?.frame = CGRectMake(self.bounds.width / 2 + point.x, point.y , 5, 5)
+    func PanAction(_ panGesture:UIPanGestureRecognizer){
+      let point = panGesture.translation(in: self)
+        topTitleView?.frame = CGRect(x: self.bounds.width / 2 + point.x, y: point.y , width: 5, height: 5)
         if persentPan >= 0.3 {
-            leftTitleView?.frame = CGRectMake(200, self.bounds.height / 2 + point.y, 5, 5)
+            leftTitleView?.frame = CGRect(x: 200, y: self.bounds.height / 2 + point.y, width: 5, height: 5)
         }else{
-        leftTitleView?.frame = CGRectMake(point.x , self.bounds.height / 2 + point.y, 5, 5)
+        leftTitleView?.frame = CGRect(x: point.x , y: self.bounds.height / 2 + point.y, width: 5, height: 5)
         }
         
-        topCtrlPoint = (topTitleView?.layer.presentationLayer()?.position)!
-        leftCtrlPoint = (leftTitleView?.layer.presentationLayer()?.position)!
+        topCtrlPoint = (topTitleView?.layer.presentation()?.position)!
+        leftCtrlPoint = (leftTitleView?.layer.presentation()?.position)!
         persentPan = point.x / self.bounds.width
-        print(persentPan)
+        print(persentPan ?? description)
        updateWaterPath()
         panGestureEnd(panGesture)
     }
     
-    func panGestureEnd(panGesture:UIPanGestureRecognizer){
+    func panGestureEnd(_ panGesture:UIPanGestureRecognizer){
         
-        if panGesture.state == UIGestureRecognizerState.Ended {
-            self.displayLink?.paused = false
-            UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.2, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-                self.topTitleView?.frame = CGRectMake(self.bounds.width / 2, 0, 5, 5)
+        if panGesture.state == UIGestureRecognizerState.ended {
+            self.displayLink?.isPaused = false
+            UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.2, options: UIViewAnimationOptions(), animations: {
+                self.topTitleView?.frame = CGRect(x: self.bounds.width / 2, y: 0, width: 5, height: 5)
                 if self.persentPan >= 0.3 {
-                    self.leftTitleView?.frame = CGRectMake(200, self.bounds.height / 2, 5, 5)
+                    self.leftTitleView?.frame = CGRect(x: 200, y: self.bounds.height / 2, width: 5, height: 5)
                 }else{
-                   self.leftTitleView?.frame = CGRectMake(0, self.bounds.height / 2, 5, 5)
+                   self.leftTitleView?.frame = CGRect(x: 0, y: self.bounds.height / 2, width: 5, height: 5)
                 }
                 
                 self.updateWaterPath()
                 
                 }, completion: { (true) in
                     
-                    self.displayLink?.paused = true
+                    self.displayLink?.isPaused = true
             })
         }
     }
@@ -100,35 +124,35 @@ class WaterView: UIView, UIGestureRecognizerDelegate {
     func updateWaterPath(){
         
         let pathTop = UIBezierPath()
-        pathTop.moveToPoint(CGPointMake(0, 0))
-        pathTop.addLineToPoint(CGPointMake(self.bounds.width, 0))
-        pathTop.addQuadCurveToPoint(CGPointMake(0, 0), controlPoint: topCtrlPoint)
-        pathTop.closePath()
-        shapLayerTop?.path = pathTop.CGPath
+        pathTop.move(to: CGPoint(x: 0, y: 0))
+        pathTop.addLine(to: CGPoint(x: self.bounds.width, y: 0))
+        pathTop.addQuadCurve(to: CGPoint(x: 0, y: 0), controlPoint: topCtrlPoint)
+        pathTop.close()
+        shapLayerTop?.path = pathTop.cgPath
         
         let pathLeft = UIBezierPath()
         
         if persentPan >= 0.3 {
-            pathLeft.moveToPoint(CGPointMake(200, 0))
-            pathLeft.addLineToPoint(CGPointMake(0, 0))
-            pathLeft.addLineToPoint(CGPointMake(0, self.bounds.height))
-            pathLeft.addLineToPoint(CGPointMake(200, self.bounds.height))
-            pathLeft.addQuadCurveToPoint(CGPointMake(200, 0), controlPoint: leftCtrlPoint)
+            pathLeft.move(to: CGPoint(x: 200, y: 0))
+            pathLeft.addLine(to: CGPoint(x: 0, y: 0))
+            pathLeft.addLine(to: CGPoint(x: 0, y: self.bounds.height))
+            pathLeft.addLine(to: CGPoint(x: 200, y: self.bounds.height))
+            pathLeft.addQuadCurve(to: CGPoint(x: 200, y: 0), controlPoint: leftCtrlPoint)
         }else{
-            pathLeft.moveToPoint(CGPointMake(0, 0))
-            pathLeft.addLineToPoint(CGPointMake(0, self.bounds.height))
-            pathLeft.addQuadCurveToPoint(CGPointMake(0, 0), controlPoint: leftCtrlPoint)
+            pathLeft.move(to: CGPoint(x: 0, y: 0))
+            pathLeft.addLine(to: CGPoint(x: 0, y: self.bounds.height))
+            pathLeft.addQuadCurve(to: CGPoint(x: 0, y: 0), controlPoint: leftCtrlPoint)
         }
         
         
-        shapLayerLeft?.path = pathLeft.CGPath
+        shapLayerLeft?.path = pathLeft.cgPath
     }
     
     func caculatePath(){
-        let poTop = (topTitleView?.layer.presentationLayer()?.position)!
-        let poLeft = (leftTitleView?.layer.presentationLayer()?.position)!
-        topCtrlPoint = CGPointMake(poTop.x, poTop.y - 2.5)
-        leftCtrlPoint = CGPointMake(poLeft.x - 2.5, poLeft.y)
+        let poTop = (topTitleView?.layer.presentation()?.position)!
+        let poLeft = (leftTitleView?.layer.presentation()?.position)!
+        topCtrlPoint = CGPoint(x: poTop.x, y: poTop.y - 2.5)
+        leftCtrlPoint = CGPoint(x: poLeft.x - 2.5, y: poLeft.y)
         updateWaterPath()
     }
 }

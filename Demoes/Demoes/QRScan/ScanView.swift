@@ -7,17 +7,41 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
 
 class ScanView: UIView {
     enum scanType {
         case line
         case net
     }
-    private var lineView:UIImageView?
-    private var sView:UIImageView?
-    private var displayLink:CADisplayLink?
-    private var lineY:CGFloat?
-    private var lineHeight:CGFloat = 14
+    fileprivate var lineView:UIImageView?
+    fileprivate var sView:UIImageView?
+    fileprivate var displayLink:CADisplayLink?
+    fileprivate var lineY:CGFloat?
+    fileprivate var lineHeight:CGFloat = 14
     var scantype:scanType = .line
     var scanSpeed:CGFloat = 1  //1...5
     
@@ -30,11 +54,11 @@ class ScanView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func preperProperty(scantype:scanType){
+    fileprivate func preperProperty(_ scantype:scanType){
         self.layer.masksToBounds = true
         sView = UIImageView(frame: self.bounds)
         sView?.image = UIImage(named: "image_sweep")
-        sView?.userInteractionEnabled = false
+        sView?.isUserInteractionEnabled = false
        
         if scantype == .line {
             lineHeight = 14
@@ -47,21 +71,21 @@ class ScanView: UIView {
             lineView = UIImageView(frame:CGRect(x: sView!.frame.origin.x, y: lineY!, width: sView!.frame.size.width, height: lineHeight))
             lineView?.image = UIImage(named: "scan_net")
         }
-        lineView?.backgroundColor = UIColor.clearColor()
-        lineView?.layer.shadowColor = lineView?.backgroundColor?.CGColor
-        lineView?.layer.shadowOffset = CGSizeMake(0, -3)
+        lineView?.backgroundColor = UIColor.clear
+        lineView?.layer.shadowColor = lineView?.backgroundColor?.cgColor
+        lineView?.layer.shadowOffset = CGSize(width: 0, height: -3)
         lineView?.layer.shadowOpacity = 1
-        lineView?.layer.contentsScale = UIScreen.mainScreen().scale
-        lineView?.userInteractionEnabled = false
+        lineView?.layer.contentsScale = UIScreen.main.scale
+        lineView?.isUserInteractionEnabled = false
         self.addSubview(sView!)
         self.addSubview(lineView!)
         
         displayLink = CADisplayLink(target: self, selector: #selector(ScanView.animating))
-        displayLink?.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        displayLink?.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
         
     }
    
-  @objc private func animating() {
+  @objc fileprivate func animating() {
         lineView?.frame = CGRect(x: sView!.frame.origin.x, y: lineY!, width: sView!.frame.size.width, height: lineHeight)
         lineY = lineY!+scanSpeed
     switch scantype {
@@ -77,14 +101,14 @@ class ScanView: UIView {
     }
     func startAnimating() {
         displayLink = CADisplayLink(target: self, selector: #selector(ScanView.animating))
-        displayLink?.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        displayLink?.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
         
     }
     func stopAnimating(){
-        displayLink?.removeFromRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        displayLink?.remove(from: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
         displayLink = nil
     }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if scantype == .line {
         scantype = .net
         }else{

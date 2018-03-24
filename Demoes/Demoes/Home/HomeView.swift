@@ -20,7 +20,7 @@ class HomeView: UITableView, UITableViewDataSource, UITableViewDelegate {
     func setting(){
         dataSource = self
         delegate = self
-        self.registerClass(UITableViewCell.self, forCellReuseIdentifier: identFier)
+        self.register(UITableViewCell.self, forCellReuseIdentifier: identFier)
         let actionModel = ActionModel()
         ActionArray = actionModel.modelArray
         self.tableFooterView = UIView()
@@ -29,30 +29,30 @@ class HomeView: UITableView, UITableViewDataSource, UITableViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ActionArray.count
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(identFier, forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: identFier, for: indexPath)
         let model = ActionArray[indexPath.row]
         cell.textLabel?.text = model.ActionName
-        cell.textLabel?.textColor = UIColor.greenColor()
-        cell.textLabel?.backgroundColor = UIColor.clearColor()
-        cell.contentView.backgroundColor = UIColor.clearColor()
-        cell.contentView.superview?.backgroundColor = UIColor.clearColor()
+        cell.textLabel?.textColor = UIColor.green
+        cell.textLabel?.backgroundColor = UIColor.clear
+        cell.contentView.backgroundColor = UIColor.clear
+        cell.contentView.superview?.backgroundColor = UIColor.clear
         return cell
     }
     
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         let vcClass = (ActionArray[indexPath.row].ActionVc) as! UIViewController.Type
         let vc = vcClass.init()
         guard let parentVc = UIView.getSelfController(self)else{return false}
-        (parentVc.navigationController as! CustomAnimaViewNavigation).pushViewController(vc, Rect: CGRect(origin: parentVc.view.center, size: CGSizeZero), animated: true)
+        (parentVc.navigationController as! CustomAnimaViewNavigation).pushViewController(vc, Rect: CGRect(origin: parentVc.view.center, size: CGSize.zero), animated: true)
         return false
     }
 }

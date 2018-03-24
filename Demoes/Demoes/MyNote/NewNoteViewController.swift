@@ -8,7 +8,7 @@
 
 import UIKit
 protocol noteDelegate {
-    func addNewNote(note:MyNote)
+    func addNewNote(_ note:MyNote)
 }
 class NewNoteViewController: UIViewController {
     @IBOutlet weak var noteView: UITextView!
@@ -25,8 +25,8 @@ class NewNoteViewController: UIViewController {
     
     func setTitle(){
         title = "新增笔记"
-        noteView.layer.contents = UIImage(named: "wall")?.CGImage
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完成", style: .Plain, target: self, action: #selector(NewNoteViewController.addNote))
+        noteView.layer.contents = UIImage(named: "wall")?.cgImage
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完成", style: .plain, target: self, action: #selector(NewNoteViewController.addNote))
         Notifications.beginInputNote.addObserve(self, object: nil, selecter: #selector(NewNoteViewController.beginInput))
     }
     
@@ -45,7 +45,7 @@ class NewNoteViewController: UIViewController {
         delegate?.addNewNote(noteModel)
         weak var weakSelf = self
         alert(massage: "已添加") { () -> (Void) in
-           weakSelf!.navigationController?.popViewControllerAnimated(true)
+           weakSelf!.navigationController?.popViewController(animated: true)
         }
         asyn_global {
             weakSelf!.writeNoteINSQ(noteModel)
@@ -53,24 +53,24 @@ class NewNoteViewController: UIViewController {
     }
     
     
-    func cutOutTitle(desc:String) -> String{
+    func cutOutTitle(_ desc:String) -> String{
         var title:String?
         if desc.characters.count > 20 {
-            let indexstart = desc.startIndex.advancedBy(20)
-            title = desc.substringToIndex(indexstart)
+            let indexstart = desc.characters.index(desc.startIndex, offsetBy: 20)
+            title = desc.substring(to: indexstart)
         }
         title = desc
         return title!
     }
     
     
-    func writeNoteINSQ(note:MyNote){
+    func writeNoteINSQ(_ note:MyNote){
        let DB = SQLiteManager.SQManager.DB
         DB?.open()
         DB?.executeUpdate("INSERT INTO T_MyNote \n" +
             "(id, title, desc, creatTime) \n" +
                 "VALUES \n" +
-            "(?, ?, ?, ?);", withArgumentsInArray: [note.id, note.title, note.desc, note.createTime])
+            "(?, ?, ?, ?);", withArgumentsIn: [note.id, note.title, note.desc, note.createTime])
         DB?.close()
     }
     
@@ -79,7 +79,7 @@ class NewNoteViewController: UIViewController {
         if noteView.text == "请输入内容" {
             noteView.text = ""
         }
-        noteView.textColor = UIColor.darkTextColor()
+        noteView.textColor = UIColor.darkText
     }
     
     

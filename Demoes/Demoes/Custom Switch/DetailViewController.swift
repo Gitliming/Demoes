@@ -13,7 +13,7 @@ class DetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view = WaterView(frame:UIScreen.mainScreen().bounds)
+        view = WaterView(frame:UIScreen.main.bounds)
         }
 
     override func didReceiveMemoryWarning() {

@@ -21,15 +21,15 @@ class ShowQRController: BaseViewController {
     
     func setupUI(){
         title = "二维码"
-        view.layer.contents = UIImage(named: "j")?.CGImage
-        QrImgView = UIImageView(frame: CGRect(origin: view.center, size: CGSizeMake(150, 150)))
+        view.layer.contents = UIImage(named: "j")?.cgImage
+        QrImgView = UIImageView(frame: CGRect(origin: view.center, size: CGSize(width: 150, height: 150)))
         QrImgView?.center = view.center
-        QrImgView?.backgroundColor = UIColor.whiteColor()
+        QrImgView?.backgroundColor = UIColor.white
         let y = QrImgView?.frame.maxY
         saveButton = UIButton(frame: CGRect(x: (view.bounds.width - 100)/2, y: y! + 20, width: 100, height: 40))
-        saveButton?.setTitle("保存图片", forState: UIControlState.Normal)
-        saveButton?.setBackgroundImage(UIImage(named:"l"), forState: UIControlState.Normal)
-        saveButton?.addTarget(self, action: #selector(ShowQRController.saveImage), forControlEvents: UIControlEvents.TouchUpInside)
+        saveButton?.setTitle("保存图片", for: UIControlState())
+        saveButton?.setBackgroundImage(UIImage(named:"l"), for: UIControlState())
+        saveButton?.addTarget(self, action: #selector(ShowQRController.saveImage), for: UIControlEvents.touchUpInside)
         
         view.addSubview(QrImgView!)
         view.addSubview(saveButton!)
@@ -41,7 +41,7 @@ class ShowQRController: BaseViewController {
         print("saveSucceful")
     }
     
-    func image(image:UIImage?, didFinishSavingWithError:NSError?, contextInfo: AnyObject?){
+    func image(_ image:UIImage?, didFinishSavingWithError:NSError?, contextInfo: AnyObject?){
         var Err = ""
         
         if didFinishSavingWithError != nil {
@@ -51,11 +51,11 @@ class ShowQRController: BaseViewController {
             Err = "保存成功！"
         }
         
-      let alertCtrl = UIAlertController(title: "提示", message: Err, preferredStyle: .Alert)
-    let alertAction = UIAlertAction(title: "sure", style: .Default, handler: nil)
+      let alertCtrl = UIAlertController(title: "提示", message: Err, preferredStyle: .alert)
+    let alertAction = UIAlertAction(title: "sure", style: .default, handler: nil)
         
         alertCtrl.addAction(alertAction)
-        self.presentViewController(alertCtrl, animated: true, completion: nil)
+        self.present(alertCtrl, animated: true, completion: nil)
     }
     
     
@@ -68,7 +68,7 @@ class ShowQRController: BaseViewController {
         
         message = "请输入内容。。。"
         }
-        let data = message.dataUsingEncoding(NSUTF8StringEncoding)
+        let data = message.data(using: String.Encoding.utf8)
         filter?.setValue( data, forKey: "inputMessage")
         var QrImg = filter?.outputImage
         
@@ -80,19 +80,19 @@ class ShowQRController: BaseViewController {
         ///获取生成的图片无损放大
         QrImg = filterColor?.outputImage
         let context = CIContext(options: nil)
-        let cgImage = context.createCGImage(QrImg!, fromRect: (QrImg?.extent)!)
+        let cgImage = context.createCGImage(QrImg!, from: (QrImg?.extent)!)
         //添加中心标志图
-        var QRImage = UIImage(CGImage: cgImage!)
+        var QRImage = UIImage(cgImage: cgImage!)
         
         UIGraphicsBeginImageContext((QrImgView?.bounds.size)!)
         let titleImg = UIImage(named: "m")
         let resetContext = UIGraphicsGetCurrentContext()
-        CGContextSetInterpolationQuality(resetContext!, CGInterpolationQuality.None)
-        QRImage.drawInRect(CGRectMake(10, 10, QrImgView!.bounds.size.width - 20, QrImgView!.bounds.size.height - 20))
-        let rect = CGRectMake((QrImgView!.bounds.size.width - 30)/2,
-                              (QrImgView!.bounds.size.height - 30)/2,
-                              30, 30)
-        titleImg?.drawInRect(rect)
+        resetContext!.interpolationQuality = CGInterpolationQuality.none
+        QRImage.draw(in: CGRect(x: 10, y: 10, width: QrImgView!.bounds.size.width - 20, height: QrImgView!.bounds.size.height - 20))
+        let rect = CGRect(x: (QrImgView!.bounds.size.width - 30)/2,
+                              y: (QrImgView!.bounds.size.height - 30)/2,
+                              width: 30, height: 30)
+        titleImg?.draw(in: rect)
         
         QRImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()

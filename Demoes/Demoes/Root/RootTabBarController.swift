@@ -10,17 +10,17 @@ import UIKit
 
 class RootTabBarController: UITabBarController {
     //tabBar子控件
-    private var viewArray = [UIView]()
+    fileprivate var viewArray = [UIView]()
     
-    private let tabBarOfHeight:CGFloat = 64
+    fileprivate let tabBarOfHeight:CGFloat = 64
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //添加tabBar顶部自定义圆弧
-        let customV:UIView = RootTabBarView(frame:CGRectMake(0, 0, screenWidth, tabBarOfHeight))
+        let customV:UIView = RootTabBarView(frame:CGRect(x: 0, y: 0, width: screenWidth, height: tabBarOfHeight))
         
-        customV.backgroundColor = UIColor.groupTableViewBackgroundColor()
+        customV.backgroundColor = UIColor.groupTableViewBackground
         
         tabBar.addSubview(customV)
         
@@ -52,7 +52,7 @@ class RootTabBarController: UITabBarController {
         
         tabBar.frame = rect
         
-        tabBar.barStyle = .Default
+        tabBar.barStyle = .default
         
         //调整tabBarItem图片位置
         
@@ -76,12 +76,12 @@ class RootTabBarController: UITabBarController {
     
     //MARK:--animaton  toDo
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
 //        startAnimation()
     }
     
-    private func startAnimation(){
+    fileprivate func startAnimation(){
         viewArray.removeAll()
         
         for i in 0..<tabBar.subviews.count{
@@ -108,7 +108,7 @@ class RootTabBarController: UITabBarController {
     
     //MARK:-- 定义动画
     
-    func animationWithView(aniView:UIView){
+    func animationWithView(_ aniView:UIView){
     
         let layer = aniView.layer
         
@@ -142,16 +142,16 @@ class RootTabBarController: UITabBarController {
         
         //添加动画
         
-        layer.addAnimation(animationScare, forKey: "transform.scare")
+        layer.add(animationScare, forKey: "transform.scare")
         
-        layer.addAnimation(animationAlpha, forKey: "opacity")
+        layer.add(animationAlpha, forKey: "opacity")
     }
     
     
     //MARK:--清除tabBar顶部线
-   private func clearTopLineOfTabBar() {
+   fileprivate func clearTopLineOfTabBar() {
         
-        let rect:CGRect = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: UIScreen.mainScreen().bounds.height)
+        let rect:CGRect = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width , height: UIScreen.main.bounds.height)
         
         UIGraphicsBeginImageContext(rect.size)
     
@@ -167,7 +167,7 @@ class RootTabBarController: UITabBarController {
     
     
     //MARK:--添加自控制器
-    private func creatSubVc() {
+    fileprivate func creatSubVc() {
         
         let one:UINavigationController = setSubVc(HomeViewController(), title: "首页", NormalImgName: "tab_icon_life", selectImgName:"tab_icon_life2")
         
@@ -190,24 +190,24 @@ class RootTabBarController: UITabBarController {
         
     
     //MARK:--设置子控制器
-    private func setSubVc(vc:UIViewController, title:String, NormalImgName:String, selectImgName:String) -> UINavigationController{
+    fileprivate func setSubVc(_ vc:UIViewController, title:String, NormalImgName:String, selectImgName:String) -> UINavigationController{
         
         let nav:UINavigationController = CustomAnimaViewNavigation(rootViewController:vc)
         
         nav.navigationItem.title = title
         
-        nav.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        nav.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         
-        nav.navigationBar.barTintColor = UIColor.greenColor()
+        nav.navigationBar.barTintColor = UIColor.green
         
-        nav.tabBarItem = UITabBarItem(title: title, image: UIImage(named: NormalImgName)?.imageWithRenderingMode(.AlwaysOriginal), selectedImage: UIImage(named: selectImgName)?.imageWithRenderingMode(.AlwaysOriginal))
+        nav.tabBarItem = UITabBarItem(title: title, image: UIImage(named: NormalImgName)?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: selectImgName)?.withRenderingMode(.alwaysOriginal))
         
         
         //设置tabBar字体颜色
 
-        nav.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.darkGrayColor()], forState: .Normal)
+        nav.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.darkGray], for: UIControlState())
         
-        nav.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.redColor()], forState: .Highlighted)
+        nav.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.red], for: .highlighted)
         
         return nav
     }

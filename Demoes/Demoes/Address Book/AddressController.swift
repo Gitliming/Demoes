@@ -22,16 +22,16 @@ class AddressController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     func prepareUI() {
-        view.layer.contents = UIImage(named: "address_2")?.CGImage
+        view.layer.contents = UIImage(named: "address_2")?.cgImage
         title = "进入通讯录"
         
         loginBtn = UIButton()
         loginBtn?.center = view.center
         loginBtn?.bounds.size = CGSize(width: 338, height: 95)
-        loginBtn?.setTitle("获取通讯录", forState: .Normal)
-        loginBtn?.setTitleColor(UIColor.greenColor(), forState: .Normal)
-        loginBtn?.setBackgroundImage(UIImage(named: "loginBtn"), forState: .Normal)
-        loginBtn?.addTarget(self, action: #selector(AddressController.login), forControlEvents: .TouchUpInside)
+        loginBtn?.setTitle("获取通讯录", for: UIControlState())
+        loginBtn?.setTitleColor(UIColor.green, for: UIControlState())
+        loginBtn?.setBackgroundImage(UIImage(named: "loginBtn"), for: UIControlState())
+        loginBtn?.addTarget(self, action: #selector(AddressController.login), for: .touchUpInside)
         view.addSubview(loginBtn!)
     }
     

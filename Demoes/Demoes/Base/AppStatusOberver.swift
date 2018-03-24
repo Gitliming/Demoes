@@ -1,3 +1,4 @@
+
 //
 //  AppStatusOberver.swift
 //  Demoes
@@ -10,8 +11,8 @@ import Foundation
 
 class AppStatusOberver: NSObject {
 
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        print("app进入--\(change![NSKeyValueChangeNewKey])")
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        print("app进入--\(String(describing: change![NSKeyValueChangeKey.newKey]))")
     }
     deinit {
         removeObserver(self, forKeyPath: "appStatus")

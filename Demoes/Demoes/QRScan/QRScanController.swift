@@ -30,36 +30,36 @@ class QRScanController: BaseViewController, AVCaptureMetadataOutputObjectsDelega
         scanQR()
 
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
     }
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         session?.stopRunning()
     }
     func setupUI(){
         title = "扫描中。。。"
-        view.layer.contents = UIImage(named: "i")?.CGImage
+        view.layer.contents = UIImage(named: "i")?.cgImage
         let scanW:CGFloat = 200
-        let point = CGPointMake(view.center.x - scanW/2, view.center.y - scanW/2)
-        scanView = ScanView(frame: CGRect(origin: point, size: CGSizeMake(scanW, scanW)))
+        let point = CGPoint(x: view.center.x - scanW/2, y: view.center.y - scanW/2)
+        scanView = ScanView(frame: CGRect(origin: point, size: CGSize(width: scanW, height: scanW)))
         
         let y = scanView?.frame.maxY
         guideLabel = UILabel(frame: CGRect(x: (scanView?.frame.origin.x)!, y: y! + 20, width: scanView!.bounds.width, height: 60))
         guideLabel?.text = "请将二维码置于窗口中,将会自动扫描"
-        guideLabel?.textColor = UIColor.whiteColor()
+        guideLabel?.textColor = UIColor.white
         guideLabel?.numberOfLines = 0
         
         let yp = guideLabel?.frame.maxY
         let xp = guideLabel?.frame.minX
         let wp = guideLabel?.bounds.width
         openPhoto = UIButton(frame: CGRect(x: xp!, y: yp!, width: wp!/2 - 2, height: 30))
-        openPhoto?.setBackgroundImage(UIImage(named: "l"), forState: .Normal)
-        openPhoto?.setTitle("打开相册", forState: .Normal)
-        openPhoto?.addTarget(self, action: #selector(QRScanController.openPhotoAction), forControlEvents: .TouchUpInside)
+        openPhoto?.setBackgroundImage(UIImage(named: "l"), for: UIControlState())
+        openPhoto?.setTitle("打开相册", for: UIControlState())
+        openPhoto?.addTarget(self, action: #selector(QRScanController.openPhotoAction), for: .touchUpInside)
         
         openLight = UIButton(frame: CGRect(x: xp! + wp!/2 + 2, y: yp!, width: wp!/2 - 2, height: 30))
-        openLight?.setTitle("打开灯光", forState: .Normal)
-        openLight?.setBackgroundImage(UIImage(named: "l"), forState: .Normal)
-        openLight?.addTarget(self, action: #selector(QRScanController.openLightAction), forControlEvents: .TouchUpInside)
+        openLight?.setTitle("打开灯光", for: UIControlState())
+        openLight?.setBackgroundImage(UIImage(named: "l"), for: UIControlState())
+        openLight?.addTarget(self, action: #selector(QRScanController.openLightAction), for: .touchUpInside)
         
         view.addSubview(scanView!)
         view.addSubview(guideLabel!)
@@ -68,10 +68,10 @@ class QRScanController: BaseViewController, AVCaptureMetadataOutputObjectsDelega
     }
     //扫描成功声音提示
     func scanedSound(){
-        let path = NSBundle.mainBundle().pathForResource("qrcode_found.wav", ofType: nil)
-        let url = NSURL(fileURLWithPath: path!)
+        let path = Bundle.main.path(forResource: "qrcode_found.wav", ofType: nil)
+        let url = URL(fileURLWithPath: path!)
         do{
-            avplayer = try AVAudioPlayer(contentsOfURL: url)
+            avplayer = try AVAudioPlayer(contentsOf: url)
             avplayer!.play()
         }catch{
             print(error)
@@ -82,50 +82,50 @@ class QRScanController: BaseViewController, AVCaptureMetadataOutputObjectsDelega
         imagePicker = UIImagePickerController()
         imagePicker!.allowsEditing = true
         imagePicker?.delegate = self
-        self.presentViewController(imagePicker!, animated: true, completion: nil)
+        self.present(imagePicker!, animated: true, completion: nil)
     }
     ///mark:--UIImagePickerControllerDelegate
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        picker.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        picker.dismiss(animated: true, completion: nil)
         let imageData = UIImageJPEGRepresentation(image, 1)
         //软件渲染消除警告修改Gpu渲染优先级提高渲染效率
         let context = CIContext(options: [kCIContextUseSoftwareRenderer:true, kCIContextPriorityRequestLow:false])
         
         let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: context, options: nil)
         let ciImage = CIImage(data: imageData!)
-        let array = detector!.featuresInImage(ciImage!)
+        let array = detector!.features(in: ciImage!)
         let feature = array.first as? CIQRCodeFeature
         var message = ""
         if feature != nil {
-             print(feature!.messageString)
+             print(feature!.messageString!)
             message = (feature?.messageString)!
         }else{
             message = "没有扫描到内容"
         }
          scanedSound()
-        let alertCtrl = UIAlertController(title: "扫描结果", message: message, preferredStyle: .ActionSheet)
+        let alertCtrl = UIAlertController(title: "扫描结果", message: message, preferredStyle: .actionSheet)
 
-        let alertAction = UIAlertAction(title: "确定", style: .Cancel) { (alertAction) in
+        let alertAction = UIAlertAction(title: "确定", style: .cancel) { (alertAction) in
             self.session?.startRunning()
         }
         alertCtrl.addAction(alertAction)
-        self.presentViewController(alertCtrl, animated: true, completion: nil)
+        self.present(alertCtrl, animated: true, completion: nil)
     }
     ///mark:--UIImagePickerControllerDelegate
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        picker.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
     
     func openLightAction(){
-       let  device =  AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        if device.hasTorch {
+       let  device =  AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        if (device?.hasTorch)! {
             do{
-               try device.lockForConfiguration()
+               try device?.lockForConfiguration()
                 if isLightOn == false {
-                     device.torchMode = AVCaptureTorchMode.On
+                     device?.torchMode = AVCaptureTorchMode.on
                     isLightOn = true
                 }else{
-                     device.torchMode = AVCaptureTorchMode.Off
+                     device?.torchMode = AVCaptureTorchMode.off
                     isLightOn = false
                 }
 
@@ -133,16 +133,16 @@ class QRScanController: BaseViewController, AVCaptureMetadataOutputObjectsDelega
             print(error)
             }
         }else{
-        let alertCtrl = UIAlertController(title: "提示", message: "sorry！你的设备不支持！", preferredStyle: .ActionSheet)
-        let alertAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
+        let alertCtrl = UIAlertController(title: "提示", message: "sorry！你的设备不支持！", preferredStyle: .actionSheet)
+        let alertAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
             alertCtrl.addAction(alertAction)
-            self.presentViewController(alertCtrl, animated: true, completion: nil)
+            self.present(alertCtrl, animated: true, completion: nil)
         }
     }
     
     func scanQR(){
         //创建设备对象
-        let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         do {
             input = try AVCaptureDeviceInput.init(device: device)
         }catch{
@@ -153,30 +153,30 @@ class QRScanController: BaseViewController, AVCaptureMetadataOutputObjectsDelega
         preLayer = AVCaptureVideoPreviewLayer(session: session)
         preLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
         preLayer?.frame = (scanView?.frame)!
-        view.layer.insertSublayer(preLayer!, atIndex: 0)
+        view.layer.insertSublayer(preLayer!, at: 0)
         
         if session?.canAddInput(input) == true && input != nil {
             session?.addInput(input)
         }else{
-            let alertVc = UIAlertController(title: "提示", message: "对不起！您的设备无法启动相机", preferredStyle: .ActionSheet)
-            let alertAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
-            let alertAction2 = UIAlertAction(title: "返回", style: .Cancel, handler: nil)
+            let alertVc = UIAlertController(title: "提示", message: "对不起！您的设备无法启动相机", preferredStyle: .actionSheet)
+            let alertAction = UIAlertAction(title: "确定", style: .default, handler: nil)
+            let alertAction2 = UIAlertAction(title: "返回", style: .cancel, handler: nil)
             alertVc.addAction(alertAction)
             alertVc.addAction(alertAction2)
-            self.presentViewController(alertVc, animated: true, completion: nil)
+            self.present(alertVc, animated: true, completion: nil)
                 return}
         if session?.canAddOutput(output) == true && output != nil{
             session?.addOutput(output)
         }else{return}
         
         //设置数据源为二维码数据源
-        output?.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
+        output?.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         output?.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
-        let screenHeight = UIScreen.mainScreen().bounds.height
-        let screenWidth = UIScreen.mainScreen().bounds.width
+        let screenHeight = UIScreen.main.bounds.height
+        let screenWidth = UIScreen.main.bounds.width
         let bounds = scanView?.bounds
         let origin = scanView?.frame.origin
-        output?.rectOfInterest = CGRectMake((origin?.y)!/screenHeight, (origin?.x)!/screenWidth, 2*(bounds?.height)!/screenHeight , 2*(bounds?.width)!/screenWidth);
+        output?.rectOfInterest = CGRect(x: (origin?.y)!/screenHeight, y: (origin?.x)!/screenWidth, width: 2*(bounds?.height)!/screenHeight , height: 2*(bounds?.width)!/screenWidth);
 
         
         //启动扫描
@@ -184,26 +184,26 @@ class QRScanController: BaseViewController, AVCaptureMetadataOutputObjectsDelega
         session?.startRunning()
     }
     //--mark AVCaptureMetadataOutputObjectsDelegate
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         scanedSound()
         session?.stopRunning()
         scanView?.stopAnimating()
         if metadataObjects != nil {
             let obj = metadataObjects.first
-            let str = obj?.stringValue
-            if str!.hasPrefix("http") {
-                let web = UIWebView(frame: CGRectMake(0, 64, view.bounds.width, view.bounds.height - 64))
-                let url = NSURL(string: str!)
-                web.loadHTMLString("您扫描到的内容是\(str)", baseURL: url)
+            let str = (obj as AnyObject).absoluteString
+            if (str??.hasPrefix("http"))! {
+                let web = UIWebView(frame: CGRect(x: 0, y: 64, width: view.bounds.width, height: view.bounds.height - 64))
+                let url = URL(string: str!!)
+                web.loadHTMLString("您扫描到的内容是\(String(describing: str))", baseURL: url)
                 view.addSubview(web)
             }else{
-                let alertCtrl = UIAlertController(title: "扫描结果", message: str, preferredStyle: .ActionSheet)
-                let alertAction = UIAlertAction(title: "确定", style: .Cancel, handler: { (alertAction) in
+                let alertCtrl = UIAlertController(title: "扫描结果", message: str!, preferredStyle: .actionSheet)
+                let alertAction = UIAlertAction(title: "确定", style: .cancel, handler: { (alertAction) in
                     self.session?.startRunning()
                     self.scanView?.startAnimating()
                 })
                 alertCtrl.addAction(alertAction)
-                self.presentViewController(alertCtrl, animated: true, completion: nil)
+                self.present(alertCtrl, animated: true, completion: nil)
             }
         }
     }

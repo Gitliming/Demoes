@@ -14,7 +14,7 @@ class InputController: BaseViewController {
     var intputFile:UITextField?
     var outputButton:UIButton?
     var scanButton:UIButton?
-    let screenWidth = UIScreen.mainScreen().bounds.width
+    let screenWidth = UIScreen.main.bounds.width
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,27 +23,27 @@ class InputController: BaseViewController {
     
     func setupUI() {
         
-        view.layer.contents = UIImage(named: "h")?.CGImage
+        view.layer.contents = UIImage(named: "h")?.cgImage
         title = "二维码工厂"
-        intputFile = UITextField(frame: CGRectMake((screenWidth - 200)/2, 100, 200, 44))
-        intputFile?.backgroundColor = UIColor.whiteColor()
-        intputFile?.borderStyle = .RoundedRect
-        intputFile?.keyboardAppearance = UIKeyboardAppearance.Default
-        outputButton = UIButton(frame: CGRectMake((screenWidth - 100)/2, 164, 100, 30))
-        outputButton?.addTarget(self, action: #selector(InputController.outputAction), forControlEvents: UIControlEvents.TouchUpInside)
-        outputButton?.setTitle("生成二维码", forState: UIControlState.Normal)
-        outputButton?.setBackgroundImage(UIImage(named:"l" ), forState: UIControlState.Normal)
+        intputFile = UITextField(frame: CGRect(x: (screenWidth - 200)/2, y: 100, width: 200, height: 44))
+        intputFile?.backgroundColor = UIColor.white
+        intputFile?.borderStyle = .roundedRect
+        intputFile?.keyboardAppearance = UIKeyboardAppearance.default
+        outputButton = UIButton(frame: CGRect(x: (screenWidth - 100)/2, y: 164, width: 100, height: 30))
+        outputButton?.addTarget(self, action: #selector(InputController.outputAction), for: UIControlEvents.touchUpInside)
+        outputButton?.setTitle("生成二维码", for: UIControlState())
+        outputButton?.setBackgroundImage(UIImage(named:"l" ), for: UIControlState())
         view.addSubview(intputFile!)
         view.addSubview(outputButton!)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Camera, target: self, action: #selector(InputController.scanAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(InputController.scanAction))
     }
     
     func scanAction(){
 //        let authorionSatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
         let scanVc = QRScanController()
 //        if authorionSatus != AVAuthorizationStatus.Authorized{
-            let rect = CGRect(origin: view.center, size: CGSizeZero)
+            let rect = CGRect(origin: view.center, size: CGSize.zero)
             (navigationController as! CustomAnimaViewNavigation).pushViewController(scanVc, Rect: rect, animated: true)
 //        }else{
 //            let url = NSURL(string: UIApplicationOpenSettingsURLString)

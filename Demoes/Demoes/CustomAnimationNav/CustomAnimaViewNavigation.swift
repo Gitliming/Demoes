@@ -22,7 +22,7 @@ class CustomAnimaViewNavigation: UINavigationController , UINavigationController
         // Dispose of any resources that can be recreated.
     }
     
-     func pushViewController(viewController: UIViewController,Rect:CGRect, animated: Bool) {
+     func pushViewController(_ viewController: UIViewController,Rect:CGRect, animated: Bool) {
         self.delegate = self
         imageRect = Rect
         isPush = true
@@ -30,13 +30,13 @@ class CustomAnimaViewNavigation: UINavigationController , UINavigationController
         super.pushViewController(viewController, animated: true)
     }
     
-    override func popViewControllerAnimated(animated: Bool) -> UIViewController? {
+    override func popViewController(animated: Bool) -> UIViewController? {
         isPush = false
         
-        return super.popViewControllerAnimated(true)
+        return super.popViewController(animated: true)
     }
     
-    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         let animatedTransition = NavigateAnimation()
         animatedTransition.isPush = isPush
