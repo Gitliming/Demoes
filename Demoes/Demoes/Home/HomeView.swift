@@ -51,6 +51,7 @@ class HomeView: UITableView, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         let vcClass = (ActionArray[indexPath.row].ActionVc) as! UIViewController.Type
         let vc = vcClass.init()
+        vc.hidesBottomBarWhenPushed = true
         guard let parentVc = UIView.getSelfController(self)else{return false}
         (parentVc.navigationController as! CustomAnimaViewNavigation).pushViewController(vc, Rect: CGRect(origin: parentVc.view.center, size: CGSize.zero), animated: true)
         return false
